@@ -35,7 +35,7 @@ href="https://wa.me/573237649689?text="><img src="https://qu.ax/ugHh.jpg" height
 <details>
 <summary><b> 💣 Contáctos</b></summary>
 
-* https://wa.me/549116640-1905
+* https://wa.me/573237649689
 
 ---
 
@@ -88,7 +88,7 @@ Si después de instalar el bot en Termux se detiene (pantalla en blanco, pérdid
 
 1. Abre Termux y navega al directorio del bot:
     ```bash
-    cd Kakaroto-Bot-MD
+    cd azumi-bot
     ```
 
 2. Inicia el bot nuevamente:
@@ -182,7 +182,7 @@ href="https://dash.skyultraplus.com"><img src="https://qu.ax/zFzXF.png" height="
 
 ### **`🔱 Propietario`**
 <a
-href="https://github.com/Diomar-s"><img src="https://qu.ax/AcSK.jpg" width="130" height="130" alt="Legendary"/></a>
+href="https://github.com/abrahan987"><img src="https://qu.ax/OzNcz.jpg" width="130" height="130" alt="Legendary"/></a>
 
 </a> 
 
@@ -190,6 +190,6 @@ href="https://github.com/Diomar-s"><img src="https://qu.ax/AcSK.jpg" width="130"
 
 ### **`🌹 CREDITOS`**
 <a
-href="https://github.com/The-King-Destroy"><img src="https://github.com/The-King-Destroy.png" width="140" height="140" alt="Destroy"/></a>
+href="https://github.com/abrahan-m"><img src="https://github.com/abrahan.png" width="140" height="140" alt="abrahan"/></a>
 
-[© Powered By Team STARCORE ⚡︎](https://whatsapp.com/channel/0029VagYdbFEwEk5htUejk0t)
+[© Powered By Team Programin server⚡︎](https://whatsapp.com/channel/0029VaehG4gKmCPX449RbA2T)
