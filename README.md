@@ -2,16 +2,16 @@
  <p align="center">🌟 déjanos tu super estrella</p>
 </p>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FF0000&lines=Bienvenido+al+Repositorio;Kakaroto+-+Bot+-+MD;Gracias+por+preferirnos;Creado+por+legendary;💨🔥+BOOM!!!;💨🔥)](https://git.io/typing-svg)
-![Kakaroto](https://i.ibb.co/4NWqF0m/file.jpg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FF0000&lines=Bienvenido+al+Repositorio;azumi+-+Bot+-+MD;Gracias+por+preferirnos;Creado+por+abrahan;💨🔥+BOOM!!!;💨🔥)](https://git.io/typing-svg)
+![Azumi](https://i.ibb.co/4NWqF0m/file.jpg)
 
 > ⚜️ Versión 3.0.0
 
 <div align="center">
  
-[![Dueño](https://img.shields.io/badge/Dueño-00802f?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/573142051545)
-[![Soporte](https://img.shields.io/badge/soporte-00802f?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/573142051545)
-[![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@Kakaroto-bot)
+[![Dueño](https://img.shields.io/badge/Dueño-00802f?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/573237649689)
+[![Soporte](https://img.shields.io/badge/soporte-00802f?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/573237649689)
+[![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@abrahan987)
 </div>
 
 ---
@@ -182,7 +182,7 @@ href="https://dash.skyultraplus.com"><img src="https://qu.ax/zFzXF.png" height="
 
 ### **`🔱 Propietario`**
 <a
-href="https://github.com/abrahan987"><img src="https://qu.ax/OzNcz.jpg" width="130" height="130" alt="Legendary"/></a>
+href="https://github.com/abrahan987"><img src="https://qu.ax/OzNcz.jpg" width="130" height="130" alt="Abrahan"/></a>
 
 </a> 
 
