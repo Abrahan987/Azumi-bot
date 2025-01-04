@@ -3,7 +3,7 @@
 </p>
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FF0000&lines=Bienvenido+al+Repositorio;azumi+-+Bot+-+MD;Gracias+por+preferirnos;Creado+por+abrahan;💨🔥+BOOM!!!;💨🔥)](https://git.io/typing-svg)
-![Azumi](https://i.ibb.co/4NWqF0m/file.jpg)
+![Azumi](https://files.catbox.moe/p1ls5x.jpg)
 
 > ⚜️ Versión 3.0.0
 
