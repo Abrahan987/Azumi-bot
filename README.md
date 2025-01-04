@@ -159,11 +159,11 @@ href="https://dash.skyultraplus.com"><img src="https://qu.ax/zFzXF.png" height="
 
 ----- 
 #### **`⏏️ ACTIVAR EN KOYEB`**
-[![Deploy to Koyeb](https://binbashbanana.github.io/deploy-buttons/buttons/remade/koyeb.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/Diomar-s/Kakaroto-Bot-MD&branch=master&name=kakarotobot-md)
+[![Deploy to Koyeb](https://binbashbanana.github.io/deploy-buttons/buttons/remade/koyeb.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/Diomar-s/azumi-MD&branch=master&name=kakarotobot-md)
 
 ------------------
 #### **`☁️ ACTIVAR EN RENDER`**
-[![Deploy to Render](https://binbashbanana.github.io/deploy-buttons/buttons/remade/render.svg)](https://dashboard.render.com/blueprint/new?repo=https%3A%2F%2Fgithub.com%2FDiomar-s%2FKakaroto-Bot-MD)
+[![Deploy to Render](https://binbashbanana.github.io/deploy-buttons/buttons/remade/render.svg)](https://dashboard.render.com/blueprint/new?repo=https%3A%2F%2Fgithub.com%2FDiomar-s%2Fazumi-Bot-MD)
 
 
 
@@ -176,8 +176,8 @@ href="https://dash.skyultraplus.com"><img src="https://qu.ax/zFzXF.png" height="
 | APP | TIPO | ENLACE |
 |------|-------------|-------|
 | WhatsApp | Canal | [¡Click aquí!](https://whatsapp.com/channel/0029VagYdbFEwEk5htUejk0t) |
-| WhatsApp | Team STARCORE | [¡Click aquí!](https://whatsapp.com/channel/0029Vaj67qQJUM2Wa5Ey3y1v/3155) |
-| WhatsApp | Grupo Ofc | [¡Click aquí!](https://chat.whatsapp.com/Jjs2l4X3LdP7RHr06WsasW) |
+| WhatsApp | programin | [¡Click aquí!](https://whatsapp.com/channel/0029VaehG4gKmCPX449RbA2T) |
+| WhatsApp | Grupo Ofc | [¡Click aquí!](https://whatsapp.com/channel/0029VaehG4gKmCPX449RbA2T) |
  
 
 ### **`🔱 Propietario`**
