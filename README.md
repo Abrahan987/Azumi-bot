@@ -175,7 +175,7 @@ href="https://dash.skyultraplus.com"><img src="https://qu.ax/zFzXF.png" height="
 
 | APP | TIPO | ENLACE |
 |------|-------------|-------|
-| WhatsApp | Canal | [¡Click aquí!](https://whatsapp.com/channel/0029VagYdbFEwEk5htUejk0t) |
+| WhatsApp | Canal | [¡Click aquí!](https://whatsapp.com/channel/0029VaehG4gKmCPX449RbA2T) |
 | WhatsApp | programin | [¡Click aquí!](https://whatsapp.com/channel/0029VaehG4gKmCPX449RbA2T) |
 | WhatsApp | Grupo Ofc | [¡Click aquí!](https://whatsapp.com/channel/0029VaehG4gKmCPX449RbA2T) |
  
