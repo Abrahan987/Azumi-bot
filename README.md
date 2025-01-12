@@ -182,7 +182,7 @@ href="https://dash.skyultraplus.com"><img src="https://qu.ax/zFzXF.png" height="
 
 ### **`🔱 Propietario`**
 <a
-href="https://github.com/abrahan987"><img src="https://qu.ax/OzNcz.jpg" width="130" height="130" alt="Abrahan"/></a>
+href="https://github.com/abraham987"><img src="https://qu.ax/OzNcz.jpg" width="130" height="130" alt="Abrahan"/></a>
 
 </a> 
 
