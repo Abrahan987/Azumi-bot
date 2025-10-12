@@ -1,36 +1,41 @@
-import fs from 'fs'
-import fetch from 'node-fetch'
-import { xpRange } from '../lib/levelling.js'
-const { levelling } = '../lib/levelling.js'
-import { promises } from 'fs'
-import { join } from 'path'
-let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, command }) => {
-try {        
-let _package = JSON.parse(await promises.readFile(join(__dirname, '../package.json')).catch(_ => ({}))) || {}
-let { exp, yenes, level, role } = global.db.data.users[m.sender]
-let { min, xp, max } = xpRange(level, global.multiplier)
-let name = await conn.getName(m.sender)
-let _uptime = process.uptime() * 1000
-let _muptime
-if (process.send) {
-process.send('uptime')
-_muptime = await new Promise(resolve => {
-process.once('message', resolve)
-setTimeout(resolve, 1000)
-}) * 1000
-}
-let user = global.db.data.users[m.sender]
-let muptime = clockString(_muptime)
-let uptime = clockString(_uptime)
-let totalreg = Object.keys(global.db.data.users).length
-let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
-let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-let mentionedJid = [who]
-let perfil = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://qu.ax/QGAVS.jpg')
-let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
-const vid = ['https://files.catbox.moe/x4kphb.mp4', 'https://files.catbox.moe/x4kphb.mp4', 'https://files.catbox.moe/x4kphb.mp4']
-
-let menu = `𔓕꯭  ꯭ 𓏲꯭֟፝੭ ✰𝐀𝐙𝐔𝐌𝐈 𝐁𝐎𝐓✰ 𓏲꯭֟፝੭ ꯭  ꯭𔓕
+//Código creado por JonathanG, dejen creditos hdp >:v 
+  
+ const menuVideos = [ 
+     'https://files.catbox.moe/slo1l0.mp4', 
+     'https://files.catbox.moe/1upmwh.mp4', 
+     'https://files.catbox.moe/mci2sn.mp4' 
+ ]; 
+ const menuImages = [ 
+     'https://files.catbox.moe/fba87o.jpg', 
+     'https://files.catbox.moe/u3itih.jpg', 
+     'https://files.catbox.moe/j3ijr0.jpg' 
+ ]; 
+ // --- --- --- --- --- --- --- --- --- --- - 
+  
+ // Función auxiliar para el tiempo de actividad  
+ function clockString(ms) { 
+     let d = isNaN(ms) ? '--' : Math.floor(ms / 86400000) 
+     let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000) % 24 
+     let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60 
+     let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60 
+     // return [d, 'd ', h, 'h ', m, 'm ', s, 's '].map(v => v.toString().padStart(2, 0)).join('') // Formato con días 
+      return [h, 'h ', m, 'm ', s, 's '].map(v => v.toString().padStart(2, 0)).join(''); // Formato horas, minutos, segundos 
+ } 
+  
+  
+ let handler = async (m, { conn, args }) => { 
+     let userId = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender; 
+     let user = global.db.data.users[userId];  
+     let name = conn.getName(userId); 
+     let _uptime = process.uptime() * 1000; 
+     let uptime = clockString(_uptime); 
+     let totalreg = Object.keys(global.db.data.users).length;  
+     let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags).length;  
+      
+     let botSettings = global.db.data.settings[conn.user.jid] || {}; 
+      
+  
+     let txt = ` 𔓕꯭  ꯭ 𓏲꯭֟፝੭ ✰𝐀𝐙𝐔𝐌𝐈 𝐁𝐎𝐓✰ 𓏲꯭֟፝੭ ꯭  ꯭𔓕
 
 ❤️ ¡𝐇𝐨𝐥𝐚! 𝐂𝐨𝐦𝐨 𝐄𝐬𝐭𝐚𝐬 𝐄𝐥 𝐃𝐢𝐚 𝐃𝐞 𝐇𝐨𝐲 *${taguser}* Azumi ${saludo}. 
 
@@ -493,27 +498,69 @@ let menu = `𔓕꯭  ꯭ 𓏲꯭֟፝੭ ✰𝐀𝐙𝐔𝐌𝐈 𝐁𝐎�
 ┃🜲 >
 ┃🜲 =>
 ┗━━━━━━━━━━━━━━━━━⪨
-> © 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐁𝐲 ☆𝙰𝙱𝚁𝙰𝙷𝙰𝙽☆`.trim()
-
-await conn.sendMessage(m.chat, { video: { url: vid.getRandom() }, caption: menu, contextInfo: { mentionedJid: [m.sender], isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: channelRD.id, newsletterName: channelRD.name, serverMessageId: -1, }, forwardingScore: 999, externalAdReply: { title: '😻 ꙰,𝙰𝚉𝚄𝙼𝙸', body: dev, thumbnailUrl: perfil, sourceUrl: redes, mediaType: 1, renderLargerThumbnail: false,
-}, }, gifPlayback: true, gifAttribution: 0 }, { quoted: null })
-await m.react(emojis)    
-
-} catch (e) {
-await m.reply(`✘ Ocurrió un error al enviar el menú\n\n${e}`)
-await m.react(error)
-}}
-
-handler.help = ['menu']
-handler.tags = ['main']
-handler.command = ['menu', 'help', 'menú'] 
-handler.register = true
-export default handler
-
-const more = String.fromCharCode(8206)
-const readMore = more.repeat(4001)
-function clockString(ms) {
-let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
-let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
-let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
-return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')}
+> © 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐁𝐲 ☆𝙰𝙱𝚁𝙰𝙷𝙰𝙽☆`.trim(); 
+ let bot = global.db.data.settings[conn.user.jid] 
+     // --- Lógica para elegir aleatoriamente entre video/gif o imagen --- 
+     const useVideo = Math.random() < 0.4; // 40% de probabilidad de usar video/gif 
+     let messageOptions = {}; 
+     let selectedMediaUrl; 
+  
+     if (useVideo && menuVideos.length > 0) { 
+         // --- Preparar mensaje con Video/GIF --- 
+         selectedMediaUrl = menuVideos[Math.floor(Math.random() * menuVideos.length)]; 
+         messageOptions = { 
+             video: { url: selectedMediaUrl }, 
+             gifPlayback: true, // Permite que los GIF se reproduzcan automáticamente 
+             caption: txt, 
+             mentions: [m.sender, userId] // Menciona a los usuarios relevantes 
+         }; 
+     } else if (menuImages.length > 0) { 
+         selectedMediaUrl = menuImages[Math.floor(Math.random() * menuImages.length)]; 
+         messageOptions = { 
+             text: txt, 
+             contextInfo: { 
+                 mentionedJid: [m.sender, userId], 
+                 isForwarded: false,  
+                forwardedNewsletterMessageInfo: {  
+                    newsletterJid: channelRD.id, 
+                    newsletterName: channelRD.name, 
+                    serverMessageId: -1,  
+                 }, 
+                 forwardingScore: 999, 
+                 externalAdReply: { 
+                     title: botname,  
+                     body: textbot,  
+                     thumbnailUrl: selectedMediaUrl,  
+                     sourceUrl: redes, 
+                     mediaType: 1,  
+                     showAdAttribution: false,  
+                     renderLargerThumbnail: true  
+                 } 
+             } 
+         }; 
+     } else { 
+         // --- Fallback: Si no hay videos ni imágenes, enviar solo texto --- 
+         messageOptions = { 
+             text: txt, 
+             mentions: [m.sender, userId] 
+         }; 
+         console.warn("Advertencia: No se encontraron URLs en menuVideos ni menuImages. Enviando solo texto."); 
+     } 
+  
+     // --- Enviar el mensaje --- 
+     try { 
+         await conn.sendMessage(m.chat, messageOptions, { quoted: m }); // Envía citando el mensaje original 
+     } catch (error) { 
+         console.error("Error al enviar el mensaje del menú:", error); 
+         // Enviar un mensaje de error simple si falla el envío complejo 
+         await conn.reply(m.chat, `Error al mostrar el menú. \n\n${txt}`, m); 
+     } 
+ }; 
+  
+  
+ handler.help = ['menu'];  
+ handler.tags = ['main']; 
+ handler.command =  ['menu', 'menú', 'help'];  
+  
+  
+ export default handler;
