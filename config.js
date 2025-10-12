@@ -1,3 +1,5 @@
+//nose bot en desarrollo staff Gojo Bot
+
 import {watchFile, unwatchFile} from 'fs';
 import chalk from 'chalk';
 import {fileURLToPath} from 'url';
