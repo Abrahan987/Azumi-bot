@@ -1,8 +1,8 @@
-<h1 align="center">AZUMI-BOT💨</h1>
+<h1 align="center">GOJŌ SATURŪ</h1>
  <p align="center">🌟 déjanos tu super estrella</p>
 </p>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FF0000&lines=Bienvenido+al+Repositorio;azumi+-+Bot+-+MD;Gracias+por+preferirnos;Creado+por+abrahan;💨🔥+BOOM!!!;💨🔥)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FF0000&lines=Bienvenido+al+Repositorio;azumi+-+Bot+-+MD;Gracias+por+preferirnos;Creado+por+abrahan+y+su+staff+gabriel+Dev-fedexyz13+JhonatanG;💨🔥+BOOM!!!;💨🔥)](https://git.io/typing-svg)
 ![Azumi](https://files.catbox.moe/p1ls5x.jpg)
 
 > ⚜️ Versión 3.0.0
