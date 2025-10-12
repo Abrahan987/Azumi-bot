@@ -1,5 +1,5 @@
 {
-"name": "Azumi-Bot-MD",
+"name": "Gojo - Bot",
 "version": "3.0.0",
 "description": "Simple WhatsApp Bot Multi Device",
 "main": "index.js",
@@ -31,7 +31,7 @@
 },
 "license": "GPL-3.0-or-later",
 "dependencies": {
-"@whiskeysockets/baileys": "github:ds6/bails",
+"@whiskeysockets/baileys": "github:EdderBot02/bail",
 "@adiwajshing/keyed-db": "^0.2.4",
 "@bochilteam/scraper": "^4.2.4",
 "@bochilteam/scraper-sosmed": "^1.0.5",
