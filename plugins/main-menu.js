@@ -66,7 +66,7 @@ let bot = global.db.data.settings[conn.user.jid]
             text: txt,
             contextInfo: {
                 mentionedJid: [m.sender, userId],
-                isForwarded: true, 
+                isForwarded: false, 
                forwardedNewsletterMessageInfo: { 
                    newsletterJid: channelRD.id,
                    newsletterName: channelRD.name,
@@ -77,7 +77,7 @@ let bot = global.db.data.settings[conn.user.jid]
                     title: botname, 
                     body: global.textbot, 
                     thumbnailUrl:  bot.logo.selectedMediaUrl || banner, 
-                    sourceUrl: redes,
+                    sourceUrl: 'pornhub.com',
                     mediaType: 1, 
                     showAdAttribution: true, 
                     renderLargerThumbnail: true 
