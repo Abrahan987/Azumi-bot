@@ -517,7 +517,7 @@ await conn.sendMessage(m.chat, {
   gifPlayback: true,
   gifAttribution: 0
 }, { quoted: null })
-await m.react(emojis)    
+await m.react(emoji3)    
 
 } catch (e) {
 await m.reply(`✘ Ocurrió un error al enviar el menú\n\n${e}`)
