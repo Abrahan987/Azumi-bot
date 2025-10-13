@@ -1,7 +1,7 @@
 import { spawn } from 'child_process'
 let handler = async (m, { conn, isROwner, text }) => {
 
-if (!process.send) throw '*『✦』Reiniciar: node start.js*\n*『✦』Reiniciar: node index.js*'
+if (!process.send) throw '*『✦』Reiniciar: sunlight.js*\n*『✦』Reiniciar: index.js*'
 
 if (conn.user.jid == conn.user.jid) {
 
@@ -18,7 +18,7 @@ process.send('reset')
 
 handler.help = ['restart']
 handler.tags = ['owner']
-handler.command = ['restart', 'reiniciar'] 
+handler.command = ['restart','reiniciar'] 
 handler.rowner = true
 
 export default handler
