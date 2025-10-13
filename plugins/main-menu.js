@@ -494,8 +494,29 @@ let menu = `𔓕꯭  ꯭ 𓏲꯭֟፝੭ 𝓚𝓪𝓴𝓪𝓻𝓸𝓽𝓸-
 ┗━━━━━━━━━━━━━━━━━⪨
 > © 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐁𝐲 ☆꧁༒ĹєǤ𝒆𝐧𝐃༒꧂☆`.trim()
 
-await conn.sendMessage(m.chat, { video: { url: vid.getRandom() }, caption: menu, contextInfo: { mentionedJid: [m.sender], isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: rcanalden, newsletterName: namechannel, serverMessageId: -1, }, forwardingScore: 999, externalAdReply: { title: '🐉 ꙰,𝐊𝐚𝐤𝐚𝐫𝐨𝐭𝐨𝐁𝐨𝐭', body: dev, thumbnailUrl: perfil, sourceUrl: redes, mediaType: 1, renderLargerThumbnail: false,
-}, }, gifPlayback: true, gifAttribution: 0 }, { quoted: null })
+await conn.sendMessage(m.chat, {
+  video: { url: vid.getRandom() },
+  caption: menu,
+  contextInfo: {
+    mentionedJid: [m.sender],
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: rcanalden,
+      newsletterName: namechannel,
+      serverMessageId: -1,
+    },
+    forwardingScore: 999,
+    externalAdReply: {
+      title: '🐉 ꙰,𝐊𝐚𝐤𝐚𝐫𝐨𝐭𝐨𝐁𝐨𝐭',
+      body: dev,
+      thumbnailUrl: perfil,
+      mediaType: 1,
+      renderLargerThumbnail: false
+    },
+  },
+  gifPlayback: true,
+  gifAttribution: 0
+}, { quoted: null })
 await m.react(emojis)    
 
 } catch (e) {
