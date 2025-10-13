@@ -280,15 +280,15 @@ global.rcanalr = {
   }
 
   global.rcanalden2 = {
-    contextInfo: {
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: idchannel,
-        serverMessageId: 100,
-        newsletterName: namechannel,
-      },
+  contextInfo: {
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: idchannel,
+      newsletterName: namechannel,
+      serverMessageId: 100
     },
-  }
+  },
+}
 
   global.rcanalx = {
     contextInfo: {
