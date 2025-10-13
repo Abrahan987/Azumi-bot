@@ -32,7 +32,7 @@ const vid = ['https://files.catbox.moe/39snlv.mp4', 'https://files.catbox.moe/39
 
 let menu = `𔓕꯭  ꯭ 𓏲꯭֟፝੭ 𝓚𝓪𝓴𝓪𝓻𝓸𝓽𝓸-𝓑𝓸𝓽-𝓜𝓓 𓏲꯭֟፝੭ ꯭  ꯭𔓕
 
-🐲 ¡𝐇𝐨𝐥𝐚! 𝐂𝐨𝐦𝐨 𝐄𝐬𝐭𝐚𝐬 𝐄𝐥 𝐃𝐢𝐚 𝐃𝐞 𝐇𝐨𝐲 *${taguser}* 𝐒𝐨𝐲 𝐤𝐚𝐤𝐚𝐫𝐨𝐭𝐨𝐁𝐨𝐭 ${saludo}. 
+🐲 ¡𝐇𝐨𝐥𝐚! 𝐂𝐨𝐦𝐨 𝐄𝐬𝐭𝐚𝐬 𝐄𝐥 𝐃𝐢𝐚 𝐃𝐞 𝐇𝐨𝐲 *${taguser}* 𝐒𝐨𝐲 𝐤𝐚𝐤𝐚𝐫𝐨𝐭𝐨𝐁𝐨𝐭
 
 ┏━━⪩「 𝐈𝐍𝐅𝐎 𝐂𝐑𝐄𝐀𝐃𝐎𝐑ᚐ 」⪨
 ┃❂ ⧼👑⧽ *Creador:* ĹєǤ𝒆𝐧𝐃
@@ -493,18 +493,28 @@ let menu = `𔓕꯭  ꯭ 𓏲꯭֟፝੭ 𝓚𝓪𝓴𝓪𝓻𝓸𝓽𝓸-
 ┃🜲 =>
 ┗━━━━━━━━━━━━━━━━━⪨
 > © 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐁𝐲 ☆꧁༒ĹєǤ𝒆𝐧𝐃༒꧂☆`.trim()
+/*respaldo por si falla recuerden quitar las /**/ si falla en el main-allfake.js🐵*/
 
+/*let idchannel = '120363394965381607@newsletter'
+let namechannel = '🐉 KakarotoBot Canal Oficial'
+
+global.rcanalden2 = {
+  contextInfo: {
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: idchannel,
+      newsletterName: namechannel,
+      serverMessageId: 100
+    }
+  }
+}
+*/
 await conn.sendMessage(m.chat, {
   video: { url: vid.getRandom() },
   caption: menu,
   contextInfo: {
     mentionedJid: [m.sender],
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-      newsletterJid: rcanalden,
-      newsletterName: namechannel,
-      serverMessageId: -1,
-    },
+    ...global.rcanalden2.contextInfo, 
     forwardingScore: 999,
     externalAdReply: {
       title: '🐉 ꙰,𝐊𝐚𝐤𝐚𝐫𝐨𝐭𝐨𝐁𝐨𝐭',
