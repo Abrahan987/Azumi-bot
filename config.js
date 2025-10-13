@@ -54,9 +54,6 @@ global.gt = '͟͞ 𝔸𝕫𝕦𝕞𝕚-𝔹𝕠𝕥𓆪 ͟͞';
 global.namechannel = '𝚂𝙴𝚁𝚅𝙸𝙳𝙾𝚁 𝙳𝙴 𝙿𝚁𝙾𝙶𝚁𝙰𝙼𝙰𝙲𝙸𝙾𝙽✍︎'
 
 
-global.stickeramor = [amor, amor2, amor3, amor4, amor5]
-global.sickerque = [que, que2, que3, que4, que5, que6]
-global.photoSity = [imagen8, imagen1, imagen4, imagen6]
 
 //• ↳ ◜𝑭𝑨𝑲𝑬 𝑬𝑺𝑻𝑰𝑳𝑶◞ • 🪩
 global.estilo = { key: {  fromMe: false, participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { orderMessage: { itemCount : -999999, status: 1, surface : 1, message: '✰𝙰𝚉𝚄𝙼𝙸-𝙱𝙾𝚃✰', orderTitle: 'Bang', thumbnail: catalogo, sellerJid: '0@s.whatsapp.net'}}}
