@@ -26,9 +26,9 @@ let totalreg = Object.keys(global.db.data.users).length
 let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
 let mentionedJid = [who]
-let perfil = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://i.ibb.co/GtYw361/Yuki.jpg')
+let perfil = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://files.catbox.moe/2v7j6r.jpg')
 let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
-const vid = ['https://qu.ax/Bjirw.mp4', 'https://qu.ax/Bjirw.mp4', 'https://qu.ax/Bjirw.mp4']
+const vid = ['https://files.catbox.moe/39snlv.mp4', 'https://files.catbox.moe/39snlv.mp4', 'https://files.catbox.moe/39snlv.mp4']
 
 let menu = `𔓕꯭  ꯭ 𓏲꯭֟፝੭ 𝓚𝓪𝓴𝓪𝓻𝓸𝓽𝓸-𝓑𝓸𝓽-𝓜𝓓 𓏲꯭֟፝੭ ꯭  ꯭𔓕
 
