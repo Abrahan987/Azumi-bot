@@ -79,7 +79,7 @@ let bot = global.db.data.settings[conn.user.jid]
                     thumbnailUrl:  bot.logo.selectedMediaUrl || banner, 
                     sourceUrl: 'pornhub.com',
                     mediaType: 1, 
-                    showAdAttribution: true, 
+                    showAdAttribution: false, 
                     renderLargerThumbnail: true 
                 }
             }
