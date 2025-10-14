@@ -105,3 +105,8 @@ handler.command = ['marry', 'divorce'];
 handler.group = true;
 
 export default handler;
+
+
+Cuando alguien responde con si o con no , no hace nada, mejora eso y también haz que cuando se diga si o no se tenga que etiquetar a la persona ejemplo 
+
+si @user
