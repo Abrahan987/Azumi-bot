@@ -75,7 +75,7 @@ let bot = global.db.data.settings[conn.user.jid]
                 forwardingScore: 999,
                 externalAdReply: {
                     title: botname, 
-                    body: global.textbot, 
+                    body: global.dev, 
                     thumbnailUrl:  bot.logo.selectedMediaUrl || banner, 
                     sourceUrl: 'pornhub.com',
                     mediaType: 1, 
