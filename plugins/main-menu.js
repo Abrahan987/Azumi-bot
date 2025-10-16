@@ -106,7 +106,7 @@ let bot = global.db.data.settings[conn.user.jid]
 
 handler.help = ['menu']; 
 handler.tags = ['main'];
-handler.command =  ['menu descargas', 'menu downloads', 'help0']; 
+handler.command =  ['menu', 'menú', 'help']; 
 
 
 export default handler;
