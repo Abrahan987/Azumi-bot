@@ -38,7 +38,7 @@ else return m.reply(`🥀 El url es incorrecto`)
 console.error(e)
 if (!stiker) stiker = e
 } finally {
-if (stiker) conn.sendFile(m.chat, stiker, 'sticker.webp', '',m, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{ showAdAttribution: false, title: packname, body: `⏤͟͞ू⃪ ፝͜⁞𝙰𝚉𝚄𝙼𝙸-𝙱𝙾𝚃✰⃔࿐`, mediaType: 2, sourceUrl: redes, thumbnail: icons}}}, { quoted: m })
+if (stiker) conn.sendFile(m.chat, stiker, 'sticker.webp', '',m, true, { contextInfo: { 'forwardingScore': 200, 'isForwarded': false, externalAdReply:{  title: packname, body: botname, mediaType: 2, sourceUrl: redes, thumbnail: icons}}}, { quoted: m })
 
 else return conn.reply(m.chat, '🐉 *_Oops! La conversión no pudo completarse. Por favor, envía primero una imagen, video o gif, y luego utiliza el comando nuevamente._*', m, rcanal)
 
