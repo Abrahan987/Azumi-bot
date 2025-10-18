@@ -4,7 +4,7 @@ let handler = async (m, { conn, usedPrefix, command, args }) => {
 if (!args[0]) return m.reply(`Ingresa un enlace de Spotify`)
     
 try {
-let api = await fetch(`https://deliriussapi-oficial.vercel.app/download/spotifydlv2?url=${args[0]}`)
+let api = await fetch(`https://apis-starlights-team.koyeb.app/starlight/spotifydl?url=${args[0]}`)
 let json = await api.json()
 let { data } = json
 let { title, artist, image, cover, url, album, duration, publish, popularity, preview, download } = data
