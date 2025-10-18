@@ -12,7 +12,7 @@ contextInfo:{
 forwardingScore: 9999999,
 isForwarded: false, 
 "externalAdReply": {
-"showAdAttribution": true,
+"showAdAttribution": false,
 "containsAutoReply": true,
 title: `[ Kakaroto - Ai ]`,
 body: ``,
