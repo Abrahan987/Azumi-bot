@@ -1,12 +1,7 @@
 const menuVideos = [
-    'https://files.catbox.moe/lux4g2.mp4',
-    'https://files.catbox.moe/1upmwh.mp4',
-    'https://files.catbox.moe/lux4g2.mp4'
-];
-const menuImages = [
-    'https://files.catbox.moe/s01djf.jpg',
-    'https://files.catbox.moe/1tz4tw.jpeg',
-    'https://files.catbox.moe/7yjot9.jpg'
+    'https://files.catbox.moe/fp6o4z.mp4',
+    'https://files.catbox.moe/4lo4fy.mp4',
+    'https://files.catbox.moe/dyocgj.mp4'
 ];
 
 // Función auxiliar para el tiempo de actividad (uptime)
@@ -523,60 +518,21 @@ let handler = async (m, { conn, args }) => {
 
     let bot = global.db.data.settings[conn.user.jid];
     
-    // Lógica para elegir aleatoriamente entre video/gif o imagen
-    const useVideo = Math.random() < 0.4; // 40% de probabilidad de usar video/gif
-    let messageOptions = {};
-    let selectedMediaUrl;
-
-    if (useVideo && menuVideos.length > 0) {
-        // Preparar mensaje con Video/GIF
-        selectedMediaUrl = menuVideos[Math.floor(Math.random() * menuVideos.length)];
-        messageOptions = {
-            video: { url: selectedMediaUrl },
-            gifPlayback: true,
-            caption: txt,
-            mentions: [m.sender, userId]
-        };
-    } else if (menuImages.length > 0) {
-        // Preparar mensaje con Imagen
-        selectedMediaUrl = menuImages[Math.floor(Math.random() * menuImages.length)];
-        messageOptions = {
-            text: txt,
-            contextInfo: {
-                mentionedJid: [m.sender, userId],
-                isForwarded: false, 
-                forwardedNewsletterMessageInfo: { 
-                    newsletterJid: channelRD.id,
-                    newsletterName: channelRD.name,
-                    serverMessageId: -1, 
-                },
-                forwardingScore: 999,
-                externalAdReply: {
-                    title: botname, 
-                    body: global.dev, 
-                    thumbnailUrl: bot.logo || banner, 
-                    sourceUrl: 'https://github.com/Abraham',
-                    mediaType: 1, 
-                    showAdAttribution: false, 
-                    renderLargerThumbnail: true 
-                }
-            }
-        };
-    } else {
-        // Fallback: Si no hay videos ni imágenes, enviar solo texto
-        messageOptions = {
-            text: txt,
-            mentions: [m.sender, userId]
-        };
-        console.warn("Advertencia: No se encontraron URLs en menuVideos ni menuImages. Enviando solo texto.");
-    }
+    // Seleccionar video aleatorio
+    let selectedVideoUrl = menuVideos[Math.floor(Math.random() * menuVideos.length)];
+    
+    let messageOptions = {
+        video: { url: selectedVideoUrl },
+        gifPlayback: true,
+        caption: txt,
+        mentions: [m.sender, userId]
+    };
 
     // Enviar el mensaje
     try {
         await conn.sendMessage(m.chat, messageOptions, { quoted: m });
     } catch (error) {
         console.error("Error al enviar el mensaje del menú:", error);
-        // Enviar un mensaje de error simple si falla el envío complejo
         await conn.reply(m.chat, `Error al mostrar el menú. \n\n${txt}`, m);
     }
 };
