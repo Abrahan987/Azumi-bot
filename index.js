@@ -42,13 +42,13 @@ let { say } = cfonts
 
 console.log(chalk.bold.greenBright(`\nStarting Kenny\n`))
 
-say('KennyBot', {
+say('GOJO BOT', {
 font: 'block',
 align: 'center',
 colors: ['yellowBright']
 })
 
-say(`Made With By Mancos y Asociados`, {
+say(`Made With By ABRAHAN-M Y STAFF GOJO`, {
 font: 'console',
 align: 'center',
 colors: ['cyan']
