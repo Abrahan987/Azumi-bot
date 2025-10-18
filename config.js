@@ -52,7 +52,7 @@ global.dev = 'A͜͡B͜͡R͜͡A͜͡H͜͡A͜͡N͜͡'
 global.textbot = 'ৎ୭࠭͢𝙰𝚉𝚄𝙼𝙸 𝙱𝙾𝚃𓆪͟͞ '
 global.gt = '͟͞ 𝔸𝕫𝕦𝕞𝕚-𝔹𝕠𝕥𓆪 ͟͞';
 global.namechannel = '𝚂𝙴𝚁𝚅𝙸𝙳𝙾𝚁 𝙳𝙴 𝙿𝚁𝙾𝙶𝚁𝙰𝙼𝙰𝙲𝙸𝙾𝙽✍︎'
-
+global.logo = 'https://files.catbox.moe/3ycwv1.jpg'
 
 
 //• ↳ ◜𝑭𝑨𝑲𝑬 𝑬𝑺𝑻𝑰𝑳𝑶◞ • 🪩
