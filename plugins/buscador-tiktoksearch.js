@@ -34,11 +34,11 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
         externalAdReply: { 
           mediaUrl: null, 
           mediaType: 1, 
-          showAdAttribution: true,
+          showAdAttribution: false,
           title: '♡  ͜ ۬︵࣪᷼⏜݊᷼𝘿𝙚𝙨𝙘𝙖𝙧𝙜𝙖𝙨⏜࣪᷼︵۬ ͜ ',
           body: '𝙰𝚉𝚄𝙼𝙸-𝙱𝙾𝚃',
           previewType: 0, 
-          thumbnail: logo5,
+          thumbnail: logo,
           sourceUrl: cn 
         }
       }
