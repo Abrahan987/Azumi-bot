@@ -1,48 +1,46 @@
-let media = imagen; // Asegúrate de que imagen10 contenga la ruta de la imagen que deseas enviar
-let handler = async (m, { conn, command }) => {
-    let fkontak = {
-        "key": {
-            "participants": "0@s.whatsapp.net",
-            "remoteJid": "status@broadcast",
-            "fromMe": false,
-            "id": "Halo"
-        },
-        "message": {
-            "contactMessage": {
-                "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`
-            }
-        },
-        "participant": "0@s.whatsapp.net"
-    };
+import fetch from 'node-fetch'
 
-    let str = `𝖡𝗂𝖾𝗇𝗏𝖾𝗇𝖽𝗂𝗈 𝖠 𝖫𝖺𝗌 𝖢𝗎𝖾𝗇𝗍𝖺𝗌 𝖮𝖿𝗂𝖼𝗂𝖺𝗅𝖾𝗌 💨
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-🐉 *Propietario:*
-Wa.me/5491166401905
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-☁️ *Developer*
-wa.me/584120346669
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-🌹 *Colaborador 1:*
-Wa.me/593984964830
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-🌹 *Colaborador 2:*
-wa.me/528711426787
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-🧩 *Grupos Oficiales:*
-1) *${gp1}*\n
-2) *${gp2}*\n
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-📍 *Canal De Youtube:*
-${yt}
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈`;
+let handler = async (m, { conn }) => {
+  await m.reply('📡 *Enviando información de las cuentas oficiales...*')
 
-    // Enviar la imagen como documento con el mensaje estructurado
-    await conn.sendFile(m.chat, media, 'imagen.jpg', str, fkontak, true);
-};
+  let staff = `𝖡𝗂𝖾𝗇𝗏𝖾𝗇𝗂𝖽𝗈 𝖠 𝖫𝖺𝗌 𝖢𝗎𝖾𝗇𝗍𝖺𝗌 𝖮𝖿𝗂𝖼𝗂𝖺𝗅𝖾𝗌 💨 
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ 
+🐉 *Propietario:* wa.me/573237649689 
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ 
+👑 *Equipo:* 
+• 𝙰𝙱𝚁𝙰𝙃𝙰𝙽 🤴 Rol: Propietario/mantenimiento/editor 
+📱 Número: wa.me/573237649689 
 
-handler.command = ['cuentas','cuentasoficiales'];
-handler.exp = 35;
-handler.register = true;
+• JONATHANG 👨‍💻 Rol: Staff/Mantenimiento 
+📱 Número: wa.me/50584887870 
 
-export default handler;
+• DEV BLACKDARK 👨‍💻 Rol: Staff/Mantenimiento 
+📱 Número: wa.me/5491156178758 
+
+• IM F'Z - TESIS 👨‍💻 Rol: Staff/Mantenimiento 
+📱 Número: wa.me/522431268546 
+
+• Gabriel-cell 👨‍💻 Rol: Staff/Soporte 
+📱 Número: wa.me/51941247696 
+
+• Cristian DEV 👨‍💻 Rol: Staff/Soporte 
+📱 Número: wa.me/50378666265 
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ 
+📍 *TIKTOK:* https://tiktok.com/@abrahan_m
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ 
+`
+
+  // descarga la imagen desde el enlace
+  let imagenURL = 'https://files.catbox.moe/3beuw9.jpg'
+  let imgBuffer = await fetch(imagenURL).then(r => r.buffer())
+
+  await conn.sendFile(m.chat, imgBuffer, 'staff.jpg', staff.trim(), m)
+  await m.react('✨')
+}
+
+handler.help = ['cuentas']
+handler.tags = ['info']
+handler.command = ['cuentas', 'cuentasoficiales']
+handler.register = true
+
+export default handler
