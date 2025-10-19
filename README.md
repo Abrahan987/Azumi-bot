@@ -1,17 +1,22 @@
-<h1 align="center">GOJŌ SATURŪ</h1>
- <p align="center">🌟 déjanos tu super estrella</p>
+<h1 align="center">✨ GOJŌ - SATURŪ ✨</h1>
+<p align="center">🌟 Déjanos tu super estrella si te gusta el proyecto</p>
+
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FF0000&center=true&width=435&lines=Bienvenido+al+Repositorio;Azumi+-+Bot+-+MD;Gracias+por+preferirnos;Creado+por+Abrahan,+Gabriel,+Dev-fedexyz13,+JhonatanG;💨🔥+BOOM!!!" />
 </p>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FF0000&lines=Bienvenido+al+Repositorio;azumi+-+Bot+-+MD;Gracias+por+preferirnos;Creado+por+abrahan+y+su+staff+gabriel+Dev-+fedexyz13+JhonatanG;💨🔥+BOOM!!!;💨🔥)](https://git.io/typing-svg)
-![Azumi](https://raw.githubusercontent.com/El-brayan502/dat3/main/uploads/ae6c76-1760912443759.jpg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/El-brayan502/dat3/main/uploads/ae6c76-1760912443759.jpg" width="300"/>
+</p>
 
-> ⚜️ Versión 3.0.0
+---
+
+### ⚜️ Versión: `3.0.0`
 
 <div align="center">
- 
-[![Dueño](https://img.shields.io/badge/Dueño-00802f?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/573237649689)
-[![Soporte](https://img.shields.io/badge/soporte-00802f?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/573237649689)
-[![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@abrahan987)
+  <a href="https://wa.me/573237649689"><img src="https://img.shields.io/badge/Dueño-00802f?style=for-the-badge&logo=whatsapp&logoColor=white" /></a>
+  <a href="https://wa.me/573237649689"><img src="https://img.shields.io/badge/Soporte-00802f?style=for-the-badge&logo=whatsapp&logoColor=white" /></a>
+  <a href="https://www.youtube.com/@abrahan987"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" /></a>
 </div>
 
 ---
