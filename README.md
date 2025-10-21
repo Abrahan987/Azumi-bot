@@ -5,7 +5,7 @@
 ![Azumi](https://raw.githubusercontent.com/El-brayan502/dat3/main/uploads/ae6c76-1760912443759.jpg)
 ---
 
-### ⚜️ Versión: `3.0.0`
+### ⚜️ Versión: `1.0.0`
 
 <div align="center">
   <a href="https://wa.me/573237649689"><img src="https://img.shields.io/badge/Dueño-00802f?style=for-the-badge&logo=whatsapp&logoColor=white" /></a>
