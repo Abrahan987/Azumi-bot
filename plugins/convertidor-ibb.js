@@ -17,7 +17,7 @@ let handler = async (m, { conn }) => {
   let formData = new FormData()
   formData.append('image', media, { filename: 'file' })
 
-  let api = await axios.post('https://api.imgbb.com/1/upload?key=10604ee79e478b08aba6de5005e6c798', formData, {
+  let api = await axios.post('https://spacny.wuaze.com/index.php#apikey=sk_2pC7acH0piExEnqzSVXlZiRI4ifCdQ4b', formData, {
     headers: {
       ...formData.getHeaders()
     }
