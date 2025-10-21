@@ -1,20 +1,8 @@
-import fetch from 'node-fetch';
-import { createWriteStream } from 'fs';
-import { pipeline } from 'stream/promises';
-import { tmpdir } from 'os';
-import { join } from 'path';
-import { createCanvas, loadImage } from 'canvas';
-import ffmpeg from 'fluent-ffmpeg';
-import { promisify } from 'util';
-import { unlink } from 'fs/promises';
-
 const menuVideos = [
     'https://files.catbox.moe/fp6o4z.mp4',
     'https://files.catbox.moe/4lo4fy.mp4',
     'https://files.catbox.moe/dyocgj.mp4'
 ];
-
-const headerImage = 'https://files.catbox.moe/5syg7h.jpg';
 
 // Función auxiliar para el tiempo de actividad (uptime)
 function clockString(ms) {
@@ -23,33 +11,6 @@ function clockString(ms) {
     let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60;
     let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60;
     return [h, 'h ', m, 'm ', s, 's '].map(v => v.toString().padStart(2, 0)).join('');
-}
-
-// Función para descargar archivo
-async function downloadFile(url, filepath) {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`Failed to download: ${response.statusText}`);
-    await pipeline(response.body, createWriteStream(filepath));
-}
-
-// Función para agregar imagen de encabezado al video
-async function addHeaderToVideo(videoPath, headerPath, outputPath) {
-    return new Promise((resolve, reject) => {
-        ffmpeg(videoPath)
-            .input(headerPath)
-            .complexFilter([
-                '[1:v]scale=iw:ih[header]',
-                '[0:v][header]overlay=0:0:enable=\'between(t,0,20)\''
-            ])
-            .outputOptions([
-                '-c:v libx264',
-                '-preset ultrafast',
-                '-c:a copy'
-            ])
-            .on('end', () => resolve(outputPath))
-            .on('error', (err) => reject(err))
-            .save(outputPath);
-    });
 }
 
 let handler = async (m, { conn, args }) => {
@@ -560,53 +521,19 @@ let handler = async (m, { conn, args }) => {
     // Seleccionar video aleatorio
     let selectedVideoUrl = menuVideos[Math.floor(Math.random() * menuVideos.length)];
     
+    let messageOptions = {
+        video: { url: selectedVideoUrl },
+        gifPlayback: true,
+        caption: txt,
+        mentions: [m.sender, userId]
+    };
+
+    // Enviar el mensaje
     try {
-        // Enviar mensaje de "procesando"
-        await conn.reply(m.chat, '⏳ Preparando el menú con encabezado...', m);
-
-        // Crear rutas temporales
-        const tempDir = tmpdir();
-        const videoPath = join(tempDir, `video_${Date.now()}.mp4`);
-        const headerPath = join(tempDir, `header_${Date.now()}.jpg`);
-        const outputPath = join(tempDir, `output_${Date.now()}.mp4`);
-
-        // Descargar video y header
-        await downloadFile(selectedVideoUrl, videoPath);
-        await downloadFile(headerImage, headerPath);
-
-        // Procesar video con encabezado
-        await addHeaderToVideo(videoPath, headerPath, outputPath);
-
-        // Enviar el video procesado
-        let messageOptions = {
-            video: { url: outputPath },
-            gifPlayback: true,
-            caption: txt,
-            mentions: [m.sender, userId]
-        };
-
         await conn.sendMessage(m.chat, messageOptions, { quoted: m });
-
-        // Limpiar archivos temporales
-        await unlink(videoPath).catch(() => {});
-        await unlink(headerPath).catch(() => {});
-        await unlink(outputPath).catch(() => {});
-
     } catch (error) {
-        console.error("Error al procesar el menú con encabezado:", error);
-        
-        // Fallback: enviar sin encabezado
-        try {
-            let messageOptions = {
-                video: { url: selectedVideoUrl },
-                gifPlayback: true,
-                caption: txt,
-                mentions: [m.sender, userId]
-            };
-            await conn.sendMessage(m.chat, messageOptions, { quoted: m });
-        } catch (fallbackError) {
-            await conn.reply(m.chat, `Error al mostrar el menú. \n\n${txt}`, m);
-        }
+        console.error("Error al enviar el mensaje del menú:", error);
+        await conn.reply(m.chat, `Error al mostrar el menú. \n\n${txt}`, m);
     }
 };
 
