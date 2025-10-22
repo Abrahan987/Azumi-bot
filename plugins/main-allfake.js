@@ -23,7 +23,7 @@ let syt = 'https://youtube.com'
 global.docs = ['doc1', 'doc2', 'doc3']
 global.nomorown = '526641784469@s.whatsapp.net'
 global.logo = 'https://files.catbox.moe/flpxgg.jpg'
-global.iconorcanal = 'https://files.catbox.moe/onsgiy.jpg'
+global.iconorcanal = 'https://files.catbox.moe/hlxwql.jpg'
 global.metanombre = 'Meta AO'
 
 let idchannel = '120363394965381607@newsletter'
