@@ -17,100 +17,53 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
       let img = await q.download?.()
 
       if (!img) {
-        return conn.reply(m.chat, `❀ Por favor, envía una imagen o video para hacer un sticker.`, m, {
-          contextInfo: { 
-            externalAdReply: { 
-              showAdAttribution: false, 
-              title: global.packname || 'Azumi-Bot', 
-              body: global.dev || 'ABRAHAM', 
-              mediaType: 1, 
-              thumbnail: await (await conn.getFile(global.logo || global.icons)).data,
-              sourceUrl: global.redes || ''
-            }
-          }
-        })
+        return m.reply(`❀ Por favor, envía una imagen o video para hacer un sticker.`)
       }
 
       let out
       try {
-        // Obtener textos personalizados del usuario
         let userId = m.sender
         let packstickers = global.db.data.users[userId] || {}
         let texto1 = packstickers.text1 || global.packsticker
-        let texto2 = packstickers.text2 || global.packsticker2 || global.author
+        let texto2 = packstickers.text2 || global.packsticker2
 
         stiker = await sticker(img, false, texto1, texto2)
-      } catch (e) {
-        console.error(e)
       } finally {
         if (!stiker) {
           if (/webp/g.test(mime)) out = await webp2png(img)
           else if (/image/g.test(mime)) out = await uploadImage(img)
           else if (/video/g.test(mime)) out = await uploadFile(img)
           if (typeof out !== 'string') out = await uploadImage(img)
-          
-          // Obtener textos personalizados del usuario
-          let userId = m.sender
-          let packstickers = global.db.data.users[userId] || {}
-          let texto1 = packstickers.text1 || global.packsticker
-          let texto2 = packstickers.text2 || global.packsticker2 || global.author
-          
-          stiker = await sticker(false, out, texto1, texto2)
+          stiker = await sticker(false, out, global.packsticker, global.packsticker2)
         }
       }
     } else if (args[0]) {
       if (isUrl(args[0])) {
-        // Obtener textos personalizados del usuario
-        let userId = m.sender
-        let packstickers = global.db.data.users[userId] || {}
-        let texto1 = packstickers.text1 || global.packsticker
-        let texto2 = packstickers.text2 || global.packsticker2 || global.author
-        
-        stiker = await sticker(false, args[0], texto1, texto2)
+        stiker = await sticker(false, args[0], global.packsticker, global.packsticker2)
       } else {
         return m.reply(`⚠︎ El URL es incorrecto...`)
       }
     }
-  } catch (e) {
-    console.error(e)
-    if (!stiker) stiker = e
   } finally {
     if (stiker) {
-      // Obtener el thumbnail
-      let thumbBuffer
-      try {
-        thumbBuffer = await (await conn.getFile(global.logo || global.icons)).data
-      } catch {
-        thumbBuffer = null
-      }
-
+      // AQUÍ SÍ VA EL ICONO (cuando se crea el sticker exitosamente)
       conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, true, { 
         contextInfo: { 
           'forwardingScore': 200, 
           'isForwarded': false, 
           externalAdReply: { 
             showAdAttribution: false, 
-            title: global.packname || 'Azumi-Bot', 
-            body: global.dev || 'ABRAHAM', 
+            title: global.packname || 'Sticker', 
+            body: `⏤͟͞ू⃪ ፝͜⁞${global.botname || 'BOT'}✰⃔࿐`, 
             mediaType: 2, 
             sourceUrl: global.redes || '', 
-            thumbnail: thumbBuffer
+            thumbnail: global.icons || global.logo || ''
           }
         }
       }, { quoted: m })
     } else {
-      return conn.reply(m.chat, `❀ Por favor, envía una imagen o video para hacer un sticker.`, m, {
-        contextInfo: { 
-          externalAdReply: { 
-            showAdAttribution: false, 
-            title: global.packname || 'Azumi-Bot', 
-            body: global.dev || 'ABRAHAM', 
-            mediaType: 1, 
-            thumbnail: await (await conn.getFile(global.logo || global.icons)).data,
-            sourceUrl: global.redes || ''
-          }
-        }
-      })
+      // Sin icono en mensajes de error
+      return m.reply(`❀ Por favor, envía una imagen o video para hacer un sticker.`)
     }
   }
 }
