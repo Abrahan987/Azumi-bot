@@ -13,7 +13,7 @@ let conn = {
   getName: (jid) => 'Bot Owner'
 }
 
-let author = 'VEGETA-BOT-MB'
+let author = 'ɢᴏᴊᴏ̃ ʙᴏᴛ'
 let sgc = 'https://instagram.com'
 let sig = 'https://instagram.com'
 let sfb = 'https://facebook.com'
@@ -21,13 +21,13 @@ let snh = 'https://tiktok.com'
 let syt = 'https://youtube.com'
 
 global.docs = ['doc1', 'doc2', 'doc3']
-global.nomorown = '526641784469@s.whatsapp.net'
+global.nomorown = '573237649689@s.whatsapp.net'
 global.logo = 'https://files.catbox.moe/flpxgg.jpg'
 global.iconorcanal = 'https://files.catbox.moe/hlxwql.jpg'
 global.metanombre = 'Meta AO'
 
 let idchannel = '120363394965381607@newsletter'
-let namechannel = '𝚅𝙴𝙶𝙴𝚃𝙰-𝙱𝙾𝚃-𝙼𝙱 𝑼𝐩𝐝𝐚𝐭𝐞☁️'
+let namechannel = 'ɢᴏᴊᴏ̃ ᴄᴀɴᴀʟఌ︎'
 let iconorest = 'https://files.catbox.moe/2v7j6r.jpg'
 let icono = 'https://files.catbox.moe/tze2i9.jpg'
 let iconoden = 'https://files.catbox.moe/nhn6ac.jpg'
@@ -38,8 +38,8 @@ global.done = '✅'
 global.error = '✖️'
 global.msm = '⚠️'
 
-global.emoji = '🩸'
-global.emoji2 = '📿'
+global.emoji = '🩷'
+global.emoji2 = '😺'
 global.emoji3 = '⚡️'
 global.emoji4 = '🐉'
 global.emoji5 = '☁️'
@@ -299,7 +299,7 @@ global.rcanalr = {
         newsletterName: namechannel,
       },
       externalAdReply: {
-        title: '𝚅𝙴𝙶𝙴𝚃𝙰-𝙱𝙾𝚃-𝙼𝙱 𝑼𝐩𝐝𝐚𝐭𝐞☁️',
+        title: 'ɢᴏᴊᴏ̃ ʙᴏᴛ',
         body: '',
         mediaUrl: null,
         description: null,
@@ -320,7 +320,7 @@ global.rcanalr = {
         newsletterName: namechannel,
       },
       externalAdReply: {
-        title: '𝚅𝙴𝙶𝙴𝚃𝙰-𝙱𝙾𝚃-𝙼𝙱 𝑼𝐩𝐝𝐚𝐭𝐞☁️',
+        title: 'sᴀᴛᴜʀᴜ̄ ʙᴏᴛ',
         body: '',
         mediaUrl: null,
         description: null,
