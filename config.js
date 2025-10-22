@@ -42,6 +42,8 @@ global.jadi = 'AZUMIJadiBot'
 //• ↳ ◜𝑴𝑨𝑹𝑪𝑨𝑺 𝑫𝑬 𝑨𝑮𝑼𝑨◞ • 💌
 global.packsticker = `♾ ━━━━━━━━\n├ ɓσƭ:\n├ ρяοριєταяιο:\n├ ƒєϲнα ∂є ϲяєαϲιόи:\n├ нοяα:\n♾━━━━━━━━`
 global.packname = `𝗔𝘇𝘂𝗺𝗶-𝗕𝗼𝘁`
+global.packsticker2 = `♾━━━━━━━━\n⇝͟͞ ۵̤͟𝗔𝘇𝘂𝗺𝗶-𝗕𝗼𝘁♡̵̑ ͟͞ ⋆\n⇝ ۵-̅𝐀𝐁𝐑𝐀𝐇𝐀𝐍-͞ˍ\n⇝ ${moment.tz('America/Los_Angeles').format('DD/MM/YY')}\n⇝ ${moment.tz('America/Los_Angeles').format('HH:mm:ss')} \n♾━━━━━━━━\n\n\n\nѕτιϲκєя ϐγ: ৎ୭࠭͢𝐀𝐙𝐔𝐌𝐈-𝐁𝐎𝐓✰𓆪͟͞ `
+global.packname = `𝗔𝘇𝘂𝗺𝗶-𝗕𝗼𝘁`
 global.author = `♾━━━━━━━━\n⇝͟͞ ۵̤͟𝗔𝘇𝘂𝗺𝗶-𝗕𝗼𝘁♡̵̑ ͟͞ ⋆\n⇝ ۵-̅𝐀𝐁𝐑𝐀𝐇𝐀𝐍-͞ˍ\n⇝ ${moment.tz('America/Los_Angeles').format('DD/MM/YY')}\n⇝ ${moment.tz('America/Los_Angeles').format('HH:mm:ss')} \n♾━━━━━━━━\n\n\n\nѕτιϲκєя ϐγ: ৎ୭࠭͢𝐀𝐙𝐔𝐌𝐈-𝐁𝐎𝐓✰𓆪͟͞ `;
 global.wm = 'ৎ୭࠭͢𝐀𝐙𝐔𝐌𝐈-𝐁𝐎𝐓ⷭ𓆪͟͞ ';
 global.titulowm = '͟͞ ৎ୭࠭͢ᴀᴢᴜᴍɪ❦︎𓆪 ͟͞';
