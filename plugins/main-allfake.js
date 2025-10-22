@@ -5,10 +5,10 @@ import moment from 'moment-timezone'
 const { generateWAMessageFromContent, prepareWAMessageMedia, proto } = pkg
 
 let AraChu2 = {
-  getRandom: () => 'https://files.catbox.moe/2v7j6r.jpg'
+  getRandom: () => 'https://files.catbox.moe/8b65st.jpg'
 }
 
-let owner = ['5216641784469']
+let owner = ['573237649689']
 let conn = {
   getName: (jid) => 'Bot Owner'
 }
@@ -22,16 +22,16 @@ let syt = 'https://youtube.com'
 
 global.docs = ['doc1', 'doc2', 'doc3']
 global.nomorown = '573237649689@s.whatsapp.net'
-global.logo = 'https://files.catbox.moe/flpxgg.jpg'
+global.logo = 'https://files.catbox.moe/8b65st.jpg'
 global.iconorcanal = 'https://files.catbox.moe/hlxwql.jpg'
 global.metanombre = 'Meta AO'
 
 let idchannel = '120363394965381607@newsletter'
 let namechannel = 'ɢᴏᴊᴏ̃ ᴄᴀɴᴀʟఌ︎'
-let iconorest = 'https://files.catbox.moe/2v7j6r.jpg'
-let icono = 'https://files.catbox.moe/tze2i9.jpg'
-let iconoden = 'https://files.catbox.moe/nhn6ac.jpg'
-let iconodev = 'https://files.catbox.moe/8bk08z.jpg' 
+let iconorest = 'https://files.catbox.moe/8b65st.jpg'
+let icono = 'https://files.catbox.moe/8b65st.jpg'
+let iconoden = 'https://files.catbox.moe/8b65st.jpg'
+let iconodev = 'https://files.catbox.moe/8b65st.jpg' 
 
 global.rwait = '🕒'
 global.done = '✅'
@@ -636,7 +636,7 @@ function ucapan() {
 }
 
 function ThumbUrl() {
-  return pickRandom(['https://files.catbox.moe/0q5oja.jpg'])
+  return pickRandom(['https://files.catbox.moe/8b65st.jpg'])
 }
 
 export default handler
