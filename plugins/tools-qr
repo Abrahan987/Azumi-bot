@@ -1,0 +1,112 @@
+import { createCanvas, loadImage } from 'canvas';
+import QRCode from 'qrcode';
+import fs from 'fs';
+
+const handler = async (m, { conn, text }) => {
+  if (!text) {
+    return conn.sendMessage(m.chat, { 
+      text: '⚠️ Uso correcto:\n\n*.qr texto o URL*\n\nEjemplo:\n.qr https://github.com\n.qr Hola mundo' 
+    }, { quoted: m });
+  }
+
+  try {
+    await conn.sendMessage(m.chat, { react: { text: '⏳', key: m.key } });
+
+    // Colores aleatorios
+    const colors = [
+      { dark: '#E91E63', light: '#FCE4EC' }, // Rosa
+      { dark: '#9C27B0', light: '#F3E5F5' }, // Morado
+      { dark: '#3F51B5', light: '#E8EAF6' }, // Azul índigo
+      { dark: '#00BCD4', light: '#E0F7FA' }, // Cyan
+      { dark: '#4CAF50', light: '#E8F5E9' }, // Verde
+      { dark: '#FF9800', light: '#FFF3E0' }, // Naranja
+      { dark: '#F44336', light: '#FFEBEE' }, // Rojo
+      { dark: '#009688', light: '#E0F2F1' }, // Verde azulado
+      { dark: '#673AB7', light: '#EDE7F6' }, // Violeta
+      { dark: '#FF5722', light: '#FBE9E7' }  // Naranja profundo
+    ];
+
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+    // Generar QR en buffer
+    const qrBuffer = await QRCode.toBuffer(text, {
+      errorCorrectionLevel: 'H', // Alto nivel de corrección para soportar logo
+      type: 'png',
+      width: 800,
+      margin: 2,
+      color: {
+        dark: randomColor.dark,
+        light: randomColor.light
+      }
+    });
+
+    // Crear canvas y cargar QR
+    const canvas = createCanvas(800, 800);
+    const ctx = canvas.getContext('2d');
+
+    const qrImage = await loadImage(qrBuffer);
+    ctx.drawImage(qrImage, 0, 0, 800, 800);
+
+    // Cargar y dibujar logo central
+    try {
+      const logo = await loadImage('https://spacny.wuaze.com//uploads/IMG-20251024-WA0214.jpg'); // Tu link.jpg aquí
+      
+      const logoSize = 120;
+      const logoX = (800 - logoSize) / 2;
+      const logoY = (800 - logoSize) / 2;
+
+      // Fondo blanco circular para el logo
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.arc(400, 400, logoSize / 2 + 10, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Dibujar logo circular
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(400, 400, logoSize / 2, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.drawImage(logo, logoX, logoY, logoSize, logoSize);
+      ctx.restore();
+
+      // Borde del logo
+      ctx.strokeStyle = randomColor.dark;
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.arc(400, 400, logoSize / 2, 0, Math.PI * 2);
+      ctx.stroke();
+    } catch (logoErr) {
+      console.log('Logo no disponible, usando QR simple');
+    }
+
+    // Guardar imagen
+    const fileName = `./tmp/qr_${Date.now()}.png`;
+    if (!fs.existsSync('./tmp')) fs.mkdirSync('./tmp');
+    
+    const out = fs.createWriteStream(fileName);
+    const stream = canvas.createPNGStream();
+    stream.pipe(out);
+
+    out.on('finish', async () => {
+      await conn.sendMessage(m.chat, {
+        image: { url: fileName },
+        caption: `✅ *QR Code Generado*\n\n📝 Contenido: ${text.slice(0, 50)}${text.length > 50 ? '...' : ''}\n🎨 Color: ${randomColor.dark}`
+      }, { quoted: m });
+      
+      fs.unlinkSync(fileName);
+      await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } });
+    });
+
+  } catch (err) {
+    console.error('Error generando QR:', err);
+    await conn.sendMessage(m.chat, { 
+      text: `❌ Error al generar QR: ${err.message}` 
+    }, { quoted: m });
+  }
+};
+
+handler.help = ['qr <texto>'];
+handler.tags = ['tools'];
+handler.command = /^qr$/i;
+
+export default handler;
