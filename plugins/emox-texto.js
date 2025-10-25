@@ -86,13 +86,13 @@ const handler = async (msg, { conn, args }) => {
 
   if (!content || content.length === 0) {
     return conn.sendMessage(chatId, {
-      text: `✏️ Usa el comando así:\n\n*.texto [color opcional] tu mensaje*\n\nEjemplos:\n- .texto azul Hola grupo\n- .texto Buenos días a todos\n\nColores disponibles:\nazul, rojo, verde, rosa, morado, negro, naranja, gris, celeste`
+      text: 'Usa el comando asi:\n\n.texto [color opcional] tu mensaje\n\nEjemplos:\n- .texto azul Hola grupo\n- .texto Buenos dias a todos\n\nColores disponibles:\nazul, rojo, verde, rosa, morado, negro, naranja, gris, celeste'
     }, { quoted: msg });
   }
 
   const displayName = await niceName(targetJid, conn, chatId, quotedName, fallbackPN);
 
-  let avatarUrl = 'https://spacny.wuaze.com//uploads/IMG-20251024-WA0214.jpg';
+  let avatarUrl = 'https://spacny.wuaze.com/uploads/IMG-20251024-WA0214.jpg';
   try {
     avatarUrl = await conn.profilePictureUrl(targetJid, 'image');
   } catch {}
@@ -142,7 +142,7 @@ const handler = async (msg, { conn, args }) => {
     draw.fillText(l, 540, startY + (i * 80));
   });
 
-  const logo = await loadImage('https://cdn.russellxz.click/bbf46a3c.png');
+  const logo = await loadImage('https://spacny.wuaze.com//uploads/IMG-20251025-WA0056.jpg');
   const logoWidth = 140;
   const logoHeight = 140;
   const x = canvas.width - logoWidth - 40;
@@ -150,6 +150,9 @@ const handler = async (msg, { conn, args }) => {
   draw.drawImage(logo, x, y, logoWidth, logoHeight);
 
   const fileName = `./tmp/texto-${Date.now()}.png`;
+  
+  if (!fs.existsSync('./tmp')) fs.mkdirSync('./tmp');
+  
   const out = fs.createWriteStream(fileName);
   const stream = canvas.createPNGStream();
   stream.pipe(out);
@@ -157,7 +160,7 @@ const handler = async (msg, { conn, args }) => {
   out.on('finish', async () => {
     await conn.sendMessage(chatId, {
       image: { url: fileName },
-      caption: `🖼 Generado por ⏤͟͞ू⃪ ፝͜⁞sʜɪᴋɪᴍᴏʀɪ🩷`
+      caption: 'Generado por GOJŌ BOT 💙'
     }, { quoted: msg });
     fs.unlinkSync(fileName);
   });
