@@ -10,7 +10,7 @@ let tesisteamo = await fetch(darkGay)
 let tesisteamo2 = await tesisteamo.json()
 let result = tesisteamo2.results[0]
 
-let txt = `*Nombre:* ${result.name}\n*Owner:* ${result.creator}\n*Estrellas:* ${result.stars}\n*Bifurcaciones:* ${result.forks}\n*Descripcion:* ${result.description}\n*Creado:* ${result.createdAt}\n*Link:* ${result.cloneUrl}`;
+let txt = `🌿 *Nombre:* ${result.name}\n🍃 *Owner:* ${result.creator}\n🌟*Estrellas:* ${result.stars}\n🌾 *Bifurcaciones:* ${result.forks}\n🌃 *Descripcion:* ${result.description}\n🌸 *Creado:* ${result.createdAt}\n\n>*Link:* ${result.cloneUrl}`;
 
 conn.reply(m.chat, txt, m, rcanal)
 
