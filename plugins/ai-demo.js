@@ -25,8 +25,8 @@ sourceUrl: 'https://whatsapp.com/channel/0029VagYdbFEwEk5htUejk0t'}}},
     }
 }
 
-handler.command = handler.help = ['demo'];
-handler.tags = ['ai'];
+handler.command = ['demo'];
+// handler.tags = ['ai'];
 
 export default handler;
 
