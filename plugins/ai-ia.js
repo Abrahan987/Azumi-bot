@@ -11,7 +11,7 @@ m.reply(json.data)
 m.reply('Api más mrd se jodio' + error.message)
 }}
 
-handler.tags = ['ia']
+handler.tags = handler.help = ['ia']
 handler.command = ['ia','chatgpt']
 
 export default handler
