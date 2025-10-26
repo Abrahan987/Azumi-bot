@@ -17,7 +17,7 @@ const handler = async (m, { conn, text, command, args, usedPrefix }) => {
 handler.help = ['azumi'];
 handler.tags = ['ai'];
 handler.register = true;
-handler.command = ['azumi', 'Azumi'];
+handler.command = ['azumi', 'simi'];
 
 export default handler;
 
