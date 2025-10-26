@@ -3,14 +3,14 @@ import axios from 'axios';
 import fetch from 'node-fetch';
 
 const handler = async (m, { conn, text, command, args, usedPrefix }) => {
-    if (!text) return conn.reply(m.chat, '🥰 Te faltó el texto para hablar con Azumi', m);
+    if (!text) return conn.reply(m.chat, '🥰 Te faltó el texto para hablar con Azumi', m, rcanal);
 
     try {
-        // await m.react(emojis);
+        await m.react('🌿');
         const resSimi = await simitalk(text);
         conn.sendMessage(m.chat, { text: resSimi.resultado.simsimi }, { quoted: m });
-    } catch {
-        return conn.reply(m.chat, '❌ Ocurrió un error', m);
+    } catch (e) {
+        return conn.reply(m.chat, e.message, m);
     }
 };
 
@@ -18,6 +18,7 @@ handler.help = ['azumi'];
 handler.tags = ['ai'];
 handler.register = true;
 handler.command = ['azumi', 'Azumi'];
+
 export default handler;
 
 async function simitalk(ask, apikeyyy = "iJ6FxuA9vxlvz5cKQCt3", language = "es") {
