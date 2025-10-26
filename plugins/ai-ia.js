@@ -8,7 +8,7 @@ let api = await fetch(`https://deliriussapi-oficial.vercel.app/ia/chatgpt?q=${te
 let json = await api.json()
 m.reply(json.data)
 } catch (error) {
-console.error(error)
+m.reply('Api más mrd se jodio' + error.message)
 }}
 
 handler.command = ['ia','chatgpt']
