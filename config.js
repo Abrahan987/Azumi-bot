@@ -8,7 +8,6 @@ import cheerio from 'cheerio';
 import fetch from 'node-fetch';
 import axios from 'axios';
 import moment from 'moment-timezone';
-import './plugins/main-allfake.js';
 
 //BETA: Si quiere evitar escribir el número que será bot en la consola, agregué desde aquí entonces:
 //Sólo aplica para opción 2 (ser bot con código de texto de 8 digitos)
@@ -20,13 +19,13 @@ global.owner = [
 "573237649689",
 "50584887870",
 "5216641784469",
-"+5491124918653",
+"+5491130964777",
 "",
 ""
 ];
 
 //• ↳𝑺𝑶𝑳𝑶 𝑴𝑶𝑫𝑬𝑹𝑨𝑫𝑶𝑹𝑬𝑺!
-global.mods = ['573237649689', '573249327850', '573226075979', '5491124918653', '']
+global.mods = ['573237649689', '573249327850', '573226075979', '5491130964777', '']
 
 global.suittag = ['573237649689']
 global.prems = []
