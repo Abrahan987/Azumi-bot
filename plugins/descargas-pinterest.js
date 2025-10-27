@@ -1,58 +1,85 @@
-// 🧪 COMANDO: pinterest
-// 👨‍🔬 “Con suficiente ciencia, hasta los servidores inestables obedecen.” — Senku Ishigami ⚗️
-
-import axios from 'axios'
+import axios from "axios";
+import fs from "fs";
+import os from "os";
+import path from "path";
 
 let handler = async (m, { conn, text, usedPrefix }) => {
-  if (!text)
-    return m.reply(`🧠 *Eureka!* Necesito saber qué deseas buscar en Pinterest.\n\nEjemplo:\n> ${usedPrefix}pinterest fondos aesthetic`)
+  try {
+    if (!text)
+      return m.reply(`Uso: ${usedPrefix}pin2 <tema>\nEjemplo: ${usedPrefix}pin2 fondos aesthetic`);
 
-  await m.react('⚙️')
+    await conn.sendMessage(m.chat, { text: "🔎 Buscando imágenes, espera un momento..." }, { quoted: m });
 
-  const api = 'https://api-adonix.ultraplus.click/search/pinterest?apikey=gawrgurabot&q=' + encodeURIComponent(text)
-  const maxIntentos = 5
-  let datos = null
-  let intento = 0
+    const api = `https://api-adonix.ultraplus.click/search/pinterest?apikey=gawrgurabot&q=${encodeURIComponent(text)}`;
+    const { data } = await axios.get(api);
 
-  await m.reply(`🧬 *Iniciando búsqueda científica...*\n\n🔍 Consultando servidores de Adonix...\n⚗️ Esto puede tardar un poco.\n\n> “La paciencia es parte del método científico.” — Senku`)
+    if (!data?.results?.length)
+      return m.reply("⚠️ No se encontraron resultados.");
 
-  while (intento < maxIntentos && !datos) {
-    try {
-      intento++
-      const { data } = await axios.get(api, { timeout: 60000 }) // 60 seg por intento
-      if (data && data.status && data.results?.length) {
-        datos = data.results
-        break
-      } else {
-        console.log(`Intento ${intento} fallido: respuesta vacía o inválida`)
+    const resultados = data.results.slice(0, 10); // máximo 10 imágenes
+    const tmpDir = path.join(os.tmpdir(), `pin2_${Date.now()}`);
+    fs.mkdirSync(tmpDir, { recursive: true });
+
+    // Descargar imágenes
+    const archivos = [];
+    for (let i = 0; i < resultados.length; i++) {
+      const url = resultados[i];
+      try {
+        const res = await axios.get(url, { responseType: "arraybuffer" });
+        const file = path.join(tmpDir, `img_${i}.jpg`);
+        fs.writeFileSync(file, res.data);
+        archivos.push(file);
+      } catch (err) {
+        console.log(`❌ Error descargando ${url}: ${err.message}`);
       }
-    } catch (err) {
-      console.log(`Intento ${intento} fallido:`, err.message)
-      if (intento < maxIntentos) await new Promise(r => setTimeout(r, 3000)) // Esperar 3 seg antes del siguiente intento
     }
-  }
 
-  if (!datos)
-    return m.reply(`💥 *Error tras ${maxIntentos} intentos*\n────────────────────\n⚠️ No fue posible obtener resultados de la API de Adonix.\n\n> “Hasta la ciencia necesita materia prima. Sin datos, no hay descubrimiento.” ⚗️`)
+    if (!archivos.length)
+      return m.reply("❌ No se pudieron descargar imágenes.");
 
-  // Enviar máximo 10 imágenes para no saturar
-  const resultados = datos.slice(0, 10)
+    // Contacto falso
+    const contactoFalso = {
+      key: { participant: "0@s.whatsapp.net" },
+      message: {
+        contactMessage: {
+          displayName: "Pinterest Bot",
+          vcard: `BEGIN:VCARD\nVERSION:3.0\nN:Bot;Pinterest;;;\nFN:Pinterest Auto\nitem1.TEL;waid=573001234567:+57 3001234567\nEND:VCARD`
+        }
+      }
+    };
 
-  for (const img of resultados) {
+    await conn.sendMessage(m.chat, { text: "📸 Enviando galería..." }, { quoted: contactoFalso });
+
+    // Enviar imágenes sin delay
+    const envios = archivos.map((file) =>
+      conn.sendMessage(m.chat, { image: fs.readFileSync(file) }, { quoted: contactoFalso })
+        .catch(err => console.log("Error envío:", err.message))
+    );
+
+    await Promise.all(envios);
+
     await conn.sendMessage(
       m.chat,
-      { image: { url: img } },
-      { quoted: null }
-    )
-    await new Promise(r => setTimeout(r, 1000)) // pausa 1 seg entre imágenes
+      {
+        text: `✅ Galería enviada (${archivos.length} imágenes)\n🔗 Fuente: Pinterest\n🧩 Tema: *${text}*`
+      },
+      { quoted: contactoFalso }
+    );
+
+    // Borrar temporales
+    try {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    } catch {}
+
+  } catch (err) {
+    console.error("Error en pin2:", err);
+    m.reply("❌ Error interno: " + (err.message || String(err)));
   }
+};
 
-  await m.react('✅')
-}
+handler.help = ["pin2 <texto>"];
+handler.tags = ["busqueda"];
+handler.command = ["pin2"];
+handler.group = true;
 
-handler.help = ['pinterest <texto>']
-handler.tags = ['busqueda']
-handler.command = ['pinterest', 'pin', 'pins']
-handler.group = true
-
-export default handler
+export default handler;
