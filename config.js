@@ -21,11 +21,11 @@ global.owner = [
 "5216641784469",
 "+5491130964777",
 "573133374132",
-""
+"51921826291"
 ];
 
 //• ↳𝑺𝑶𝑳𝑶 𝑴𝑶𝑫𝑬𝑹𝑨𝑫𝑶𝑹𝑬𝑺!
-global.mods = ['573237649689', '573249327850', '573226075979', '5491130964777', '']
+global.mods = ['573237649689', '573249327850', '573226075979', '5491130964777', '51921826291']
 
 global.suittag = ['573237649689']
 global.prems = []
@@ -140,6 +140,7 @@ global.keysneoxrrr = ['5VC9rvNx', 'cfALv5'];
 global.keysneoxr = keysneoxrrr[Math.floor(keysneoxrrr.length * Math.random())];
 global.lolkeysapi = ['kurumi']; // ['BrunoSobrino_2']
 global.itsrose = ['4b146102c4d500809da9d1ff'];
+global.mayapi = ['may-1b57a5b1'];
 
 global.APIs = {
   ApiEmpire: 'https://api-brunosobrino.zipponodes.xyz',
@@ -159,7 +160,8 @@ global.APIs = {
   vihangayt: 'https://vihangayt.me',
   erdwpe: 'https://api.erdwpe.com',
   xyroinee: 'https://api.xyroinee.xyz',
-  nekobot: 'https://nekobot.xyz'
+  nekobot: 'https://nekobot.xyz',
+  mayapi: 'https://mayapi.ooguy.com'
 },
 global.APIKeys = {
   'https://api.xteam.xyz': `${keysxteam}`,
@@ -171,7 +173,8 @@ global.APIKeys = {
   'https://api.ibeng.tech/docs': 'tamvan',
   'https://api.itsrose.site': 'Rs-Zeltoria',
   'https://api-xcoders.site': 'Frieren',
-  'https://api.xyroinee.xyz': 'uwgflzFEh6'
+  'https://api.xyroinee.xyz': 'uwgflzFEh6',
+  'https://mayapi.ooguy.com': 'may-1b57a5b1'
 };
 
 /** ************************/
