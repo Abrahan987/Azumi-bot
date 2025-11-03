@@ -224,18 +224,7 @@ try {
 
   global.botname = global.botname || namechannel
 
-  global.rcanal = {
-    contextInfo: {
-      externalAdReply: {
-        title: global.botname,
-        mediaType: 2,
-        previewType: "VIDEO",
-        thumbnailUrl: global.iconorcanal,
-        mediaUrl: "https://youtube.com/@brayanofc01",
-        sourceUrl: ""
-      }
-    }
-  }
+  global.rcanal = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: "120363405708643160@newsletter", serverMessageId: 100, newsletterName: namechannel, }, }, }
 
 global.rcanalr = {
     contextInfo: {
@@ -640,3 +629,4 @@ function ThumbUrl() {
 }
 
 export default handler
+        
