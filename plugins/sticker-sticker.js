@@ -11,13 +11,15 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     
     if (/webp|image|video/g.test(mime)) {
       if (/video/g.test(mime) && (q.msg || q).seconds > 15) {
-        return m.reply(`✧ ¡El video no puede durar más de 15 segundos!...`)
+        // ✅ Simplemente agregamos global.rcanal al final
+        return m.reply(`✧ ¡El video no puede durar más de 15 segundos!...`, null, global.rcanal)
       }
       
       let img = await q.download?.()
 
       if (!img) {
-        return m.reply(`❀ Por favor, envía una imagen o video para hacer un sticker.`)
+        // ✅ Simplemente agregamos global.rcanal al final
+        return m.reply(`❀ Por favor, envía una imagen o video para hacer un sticker.`, null, global.rcanal)
       }
 
       let out
@@ -41,29 +43,19 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
       if (isUrl(args[0])) {
         stiker = await sticker(false, args[0], global.packsticker, global.packsticker2)
       } else {
-        return m.reply(`⚠︎ El URL es incorrecto...`)
+        // ✅ Simplemente agregamos global.rcanal al final
+        return m.reply(`⚠︎ El URL es incorrecto...`, null, global.rcanal)
       }
     }
   } finally {
     if (stiker) {
-      // AQUÍ SÍ VA EL ICONO (cuando se crea el sticker exitosamente)
+      // ✅ CAMBIO PRINCIPAL: Agregar contextInfo del canal
       conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, true, { 
-        contextInfo: { 
-          'forwardingScore': 200, 
-          'isForwarded': false, 
-          externalAdReply: { 
-            showAdAttribution: false, 
-            title: global.packname || 'Sticker', 
-            body: `⏤͟͞ू⃪ ፝͜⁞${global.botname || 'BOT'}✰⃔࿐`, 
-            mediaType: 2, 
-            sourceUrl: global.redes || '', 
-            thumbnail: global.icons || global.logo || ''
-          }
-        }
+        contextInfo: global.rcanal.contextInfo  // ⬅️ Esta es la línea clave
       }, { quoted: m })
     } else {
-      // Sin icono en mensajes de error
-      return m.reply(`❀ Por favor, envía una imagen o video para hacer un sticker.`)
+      // ✅ Simplemente agregamos global.rcanal al final
+      return m.reply(`❀ Por favor, envía una imagen o video para hacer un sticker.`, null, global.rcanal)
     }
   }
 }
@@ -77,3 +69,20 @@ export default handler
 const isUrl = (text) => {
   return text.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)(jpe?g|gif|png)/, 'gi'))
 }
+
+// ═══════════════════════════════════════════════════
+// 📝 NOTAS DE IMPLEMENTACIÓN:
+// ═══════════════════════════════════════════════════
+// 
+// Esta es la versión MÁS SIMPLE. Solo cambios:
+// 
+// 1. En los m.reply() de error, agrega: global.rcanal al final
+//    Antes: m.reply('mensaje')
+//    Ahora:  m.reply('mensaje', null, global.rcanal)
+//
+// 2. En sendFile del sticker, cambia:
+//    Antes: contextInfo: { ... todo el código largo ... }
+//    Ahora:  contextInfo: global.rcanal.contextInfo
+//
+// ¡ESO ES TODO! 🎉
+// ═══════════════════════════════════════════════════
