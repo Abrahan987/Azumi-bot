@@ -5,7 +5,7 @@ import moment from 'moment-timezone'
 const { generateWAMessageFromContent, prepareWAMessageMedia, proto } = pkg
 
 let AraChu2 = {
-  getRandom: () => 'https://files.catbox.moe/8b65st.jpg'
+  getRandom: () => global.logo
 }
 
 let owner = ['573237649689']
@@ -26,13 +26,31 @@ global.logo = 'https://files.catbox.moe/8b65st.jpg'
 global.iconorcanal = 'https://files.catbox.moe/hlxwql.jpg'
 global.metanombre = 'Meta AO'
 
-let idchannel = '120363394965381607@newsletter'
-let namechannel = 'ɢᴏᴊᴏ̃ ᴄᴀɴᴀʟఌ︎'
-let iconorest = 'https://files.catbox.moe/8b65st.jpg'
-let icono = 'https://files.catbox.moe/8b65st.jpg'
-let iconoden = 'https://files.catbox.moe/8b65st.jpg'
-let iconodev = 'https://files.catbox.moe/8b65st.jpg' 
+// ═══════════════════════════════════════════════════
+// CONFIGURACIÓN GLOBAL DEL CANAL (CENTRALIZADA)
+// ═══════════════════════════════════════════════════
 
+// Obtener desde DB o usar valores por defecto
+function initCanalConfig() {
+  const dbSettings = global.db?.data?.settings || {};
+  
+  return {
+    jid: dbSettings.canalJid || '120363405708643160@newsletter',
+    name: dbSettings.canalName || 'ɢᴏᴊᴏ̃ ᴄᴀɴᴀʟఌ︎',
+    bannerTitle: dbSettings.canalBannerTitle || '✰𝐀𝐙𝐔𝐌𝐈 𝐁𝐎𝐓✰',
+    bannerBody: dbSettings.canalBannerBody || '𝙰𝙱𝚁𝙰𝙷𝙰𝙽-𝙼'
+  };
+}
+
+// Variables del canal (compatibilidad con código viejo)
+let idchannel = '120363405708643160@newsletter'
+let namechannel = 'ɢᴏᴊᴏ̃ ᴄᴀɴᴀʟఌ︎'
+let iconorest = global.logo
+let icono = global.logo
+let iconoden = global.logo
+let iconodev = global.logo
+
+// Emojis y mensajes
 global.rwait = '🕒'
 global.done = '✅'
 global.error = '✖️'
@@ -74,26 +92,84 @@ global.getBuffer = async function getBuffer(url, options) {
 
 let pp
 try {
-  pp = AraChu2.getRandom()
+  pp = global.logo
 } catch (e) {
   pp = await this.profilePictureUrl(m.sender, 'image')
 } finally {
+  
+  // ═══════════════════════════════════════════════════
+  // INICIALIZAR CONFIGURACIÓN DEL CANAL
+  // ═══════════════════════════════════════════════════
+  const canalConfig = initCanalConfig();
+  
+  // Actualizar variables globales con la config
+  idchannel = canalConfig.jid;
+  namechannel = canalConfig.name;
+  
+  // Exportar como globals para compatibilidad
+  global.channelid = idchannel;
+  global.channelname = namechannel;
+  global.channelJid = idchannel;
+  
+  // ═══════════════════════════════════════════════════
+  // FUNCIONES HELPER PARA CREAR CONTEXTOS CON CANAL
+  // ═══════════════════════════════════════════════════
+  
+  /**
+   * Crear contextInfo básico del canal
+   */
+  global.createCanalContext = () => ({
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: idchannel,
+      serverMessageId: 100,
+      newsletterName: namechannel,
+    }
+  });
+  
+  /**
+   * Crear externalAdReply con banner
+   */
+  global.createBannerReply = (title, thumbnailUrl = global.logo) => ({
+    title: title || canalConfig.bannerTitle,
+    body: canalConfig.bannerBody,
+    mediaUrl: null,
+    description: null,
+    previewType: "PHOTO",
+    thumbnailUrl: thumbnailUrl,
+    mediaType: 1,
+    renderLargerThumbnail: false,
+  });
+  
+  /**
+   * Crear contextInfo completo (canal + banner)
+   */
+  global.createFullContext = (title, thumbnailUrl = global.logo) => ({
+    ...global.createCanalContext(),
+    externalAdReply: global.createBannerReply(title, thumbnailUrl)
+  });
+  
+  // ═══════════════════════════════════════════════════
+  // CONFIGURACIONES GLOBALES ESTÁNDAR
+  // ═══════════════════════════════════════════════════
+  
   global.docss = pickRandom(global.docs)
   global.ephemeral = "86400"
   global.kontak2 = [
     [owner[0], await conn.getName(owner[0] + '526641784469@s.whatsapp.net'), 'Desarrollador del bot', 'brayanofc70@gmail.com', true],
     [owner[1], await conn.getName(owner[1] + '@s.whatsapp.net'), 'Desarrollador del bot', 'brayanofc70@gmail.com', true],
   ]
-  global.pppkecil = AraChu2.getRandom()
+  global.pppkecil = global.logo
   global.ucapan = ucapan()
+  
   global.ppkecil = {
     contextInfo: {
       externalAdReply: {
         showAdAttribution: false,
         title: "𝚅𝙴𝙶𝙴𝚃𝙰-𝙱𝙾𝚃-𝙼𝙱 𝑼𝐩𝐝𝐚𝐭𝐞☁️",
         body: global.author,
-  thumbnail: fs.readFileSync("./src/2025052622372713.jpg"),
-  thumbnailUrl: global.pppkecil,
+        thumbnail: fs.readFileSync("./src/2025052622372713.jpg"),
+        thumbnailUrl: global.logo,
         sourceUrl: "https://whatsapp.com/channel/0029Vb9P9ZU0gcfNusD1jG3d",
         mediaType: 1,
         renderLargerThumbnail: false
@@ -114,7 +190,7 @@ try {
         mediaUrl: sgc,
         description: "𝚅𝙴𝙶𝙴𝚃𝙰-𝙱𝙾𝚃-𝙼𝙱 𝑼𝐩𝐝𝐚𝐭𝐞☁️",
         previewType: "PHOTO",
-  thumbnail: fs.readFileSync("./src/catalogo.jpg"),
+        thumbnail: fs.readFileSync("./src/catalogo.jpg"),
         sourceUrl: "https://whatsapp.com/channel/0029VbBQ5sf4NVioq39Efn0v",
       }
     }
@@ -213,7 +289,7 @@ try {
     message: {
       contactMessage: {
         displayName: `${global.metanombre}`,
-              vcard: `BEGIN:VCARD\nVERSION:3.0\nN:XL;${global.metanombre},;;;\nFN:${global.metanombre},\nitem1.TEL;waid=13135550002:13135550002\nitem1.X-ABLabel:Contacto\nitem2.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem2.X-ABLabel:Usuario\nEND:VCARD`,
+        vcard: `BEGIN:VCARD\nVERSION:3.0\nN:XL;${global.metanombre},;;;\nFN:${global.metanombre},\nitem1.TEL;waid=13135550002:13135550002\nitem1.X-ABLabel:Contacto\nitem2.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem2.X-ABLabel:Usuario\nEND:VCARD`,
         jpegThumbnail: null,
         thumbnail: null,
         sendEphemeral: true
@@ -224,144 +300,53 @@ try {
 
   global.botname = global.botname || namechannel
 
-  global.rcanal = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: "120363405708643160@newsletter", serverMessageId: 100, newsletterName: namechannel, }, }, }
+  // ═══════════════════════════════════════════════════
+  // CONTEXTOS DEL CANAL (OPTIMIZADOS Y CENTRALIZADOS)
+  // ═══════════════════════════════════════════════════
 
-global.rcanalr = {
-    contextInfo: {
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: idchannel,
-        serverMessageId: 100,
-        newsletterName: namechannel,
-      },
-      externalAdReply: {
-        title: '🩸𝐑𝐞𝐢𝐧𝐢𝐜𝐢𝐚𝐧𝐝𝐨 𝐄𝐥 𝐁𝐨𝐭 ',
-        body: '',
-        mediaUrl: null,
-        description: null,
-        previewType: "PHOTO",
-        thumbnailUrl: iconorest,
-        mediaType: 1,
-        renderLargerThumbnail: false,
-      },
-    },
+  // Contexto básico del canal (solo marca de reenvío)
+  global.rcanal = { 
+    contextInfo: global.createCanalContext()
   }
 
-  global.rcanalw = {
-    contextInfo: {
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: idchannel,
-        serverMessageId: 100,
-        newsletterName: namechannel,
-      },
-      externalAdReply: {
-        title: '💥𝗔𝗰𝘁𝘂𝗮𝗹𝗶𝘇𝗮𝗻𝗱𝗼 𝐄𝐥 𝗕𝗼𝘁 ',
-        body: '',
-        mediaUrl: null,
-        description: null,
-        previewType: "PHOTO",
-        thumbnailUrl: icono,
-        mediaType: 1,
-        renderLargerThumbnail: false,
-      },
-    },
-  }
-
-  global.rcanalden2 = {
-  contextInfo: {
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-      newsletterJid: idchannel,
-      newsletterName: namechannel,
-      serverMessageId: 100
-    },
-  },
-}
-
-  global.rcanalx = {
-    contextInfo: {
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: idchannel,
-        serverMessageId: 100,
-        newsletterName: namechannel,
-      },
-      externalAdReply: {
-        title: 'ɢᴏᴊᴏ̃ ʙᴏᴛ',
-        body: '',
-        mediaUrl: null,
-        description: null,
-        previewType: "PHOTO",
-        thumbnailUrl: icono,
-        mediaType: 1,
-        renderLargerThumbnail: false,
-      },
-    },
-  }
-
+  // Contexto con banner para reinicio
   global.rcanalr = {
-    contextInfo: {
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: idchannel,
-        serverMessageId: 100,
-        newsletterName: namechannel,
-      },
-      externalAdReply: {
-        title: 'sᴀᴛᴜʀᴜ̄ ʙᴏᴛ',
-        body: '',
-        mediaUrl: null,
-        description: null,
-        previewType: "PHOTO",
-        thumbnailUrl: icono,
-        mediaType: 1,
-        renderLargerThumbnail: false,
-      },
-    },
+    contextInfo: global.createFullContext('🩸𝐑𝐞𝐢𝐧𝐢𝐜𝐢𝐚𝐧𝐝𝐨 𝐄𝐥 𝐁𝐨𝐭')
   }
 
+  // Contexto con banner para actualización
+  global.rcanalw = {
+    contextInfo: global.createFullContext('💥𝗔𝗰𝘁𝘂𝗮𝗹𝗶𝘇𝗮𝗻𝗱𝗼 𝐄𝐥 𝗕𝗼𝘁')
+  }
+
+  // Contexto simple sin banner (versión 2)
+  global.rcanalden2 = {
+    contextInfo: global.createCanalContext()
+  }
+
+  // Contexto con banner de Gojo Bot
+  global.rcanalx = {
+    contextInfo: global.createFullContext('ɢᴏᴊᴏ̃ ʙᴏᴛ')
+  }
+
+  // Contexto con banner de Satoru Bot
+  global.rcanalr = {
+    contextInfo: global.createFullContext('sᴀᴛᴜʀᴜ̄ ʙᴏᴛ')
+  }
+
+  // Contexto con banner de acceso denegado
   global.rcanalden = {
-    contextInfo: {
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: idchannel,
-        serverMessageId: 100,
-        newsletterName: namechannel,
-      },
-      externalAdReply: {
-        title: '🩸 𝗔𝗰𝗰𝘀𝗲𝘀𝗼 𝗡𝗼 𝗣𝗲𝗿𝗺𝗶𝘁𝗶𝗱𝗼',
-        body: '',
-        mediaUrl: null,
-        description: null,
-        previewType: "PHOTO",
-        thumbnailUrl: iconoden,
-        mediaType: 1,
-        renderLargerThumbnail: false,
-      },
-    },
+    contextInfo: global.createFullContext('🩸 𝗔𝗰𝗰𝗲𝘀𝗼 𝗡𝗼 𝗣𝗲𝗿𝗺𝗶𝘁𝗶𝗱𝗼', iconoden)
   }
 
+  // Contexto con banner de desarrollador
   global.rcanaldev = {
-    contextInfo: {
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: idchannel,
-        serverMessageId: 100,
-        newsletterName: namechannel,
-      },
-      externalAdReply: {
-        title: '📿 𝗗𝗲𝘃',
-        body: '',
-        mediaUrl: null,
-        description: null,
-        previewType: 'PHOTO',
-        thumbnailUrl: iconodev,
-        mediaType: 1,
-        renderLargerThumbnail: false,
-      },
-    },
+    contextInfo: global.createFullContext('📿 𝗗𝗲𝘃', iconodev)
   }
+
+  // ═══════════════════════════════════════════════════
+  // RESTO DE CONFIGURACIONES
+  // ═══════════════════════════════════════════════════
 
   global.fakes = Fakes()
 
@@ -371,16 +356,11 @@ global.rcanalr = {
   global.dpdf = 'application/pdf'
   global.drtf = 'text/rtf'
   global.djson = 'application/json'
-  global.thumbdoc = 'https://telegra.ph/file/6e45318d7c76f57e4a8bd.jpg'
+  global.thumbdoc = global.logo
   global.doc = pickRandom(["application/vnd.openxmlformats-officedocument.presentationml.presentation", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/vnd.ms-excel", "application/msword", "application/pdf", "text/rtf"])
 
-  global.thumbnailUrl2 = [
-    'https://files.catbox.moe/8x21hh.jpg'
-  ]
-
-  global.logo = [
-    'https://files.catbox.moe/0q5oja.jpg'
-  ]
+  global.thumbnailUrl2 = [global.logo]
+  global.logo = [global.logo]
 }
 }
 
@@ -390,47 +370,29 @@ function Fakes() {
   let Remot = pickRandom(["status@broadcast", "120363047752200594@g.us"])
   let Hai = pickRandom(["¿Qué tal? ", "Hola ", "Hey "])
   let Sarapan = "👋 " + Hai + Pagi()
-  let Thum = ThumbUrl()
+  let Thum = global.logo
+  
   let fpayment = {
-    key: {
-      participant: Parti,
-      remoteJid: Remot
-    },
+    key: { participant: Parti, remoteJid: Remot },
     message: {
       requestPaymentMessage: {
         currencyCodeIso4217: "USD",
         amount1000: SizeDoc(),
         requestFrom: Parti,
-        noteMessage: {
-          extendedTextMessage: {
-            text: Sarapan
-          }
-        },
+        noteMessage: { extendedTextMessage: { text: Sarapan } },
         expiryTimestamp: SizeDoc(),
-        amount: {
-          value: SizeDoc(),
-          offset: SizeDoc(),
-          currencyCode: "USD"
-        }
+        amount: { value: SizeDoc(), offset: SizeDoc(), currencyCode: "USD" }
       }
     }
   }
+  
   let fpoll = {
-    key: {
-      participant: Parti,
-      remoteJid: Remot
-    },
-    message: {
-      pollCreationMessage: {
-        name: Sarapan
-      }
-    }
+    key: { participant: Parti, remoteJid: Remot },
+    message: { pollCreationMessage: { name: Sarapan } }
   }
+  
   let ftroli = {
-    key: {
-      participant: Parti,
-      remoteJid: Remot
-    },
+    key: { participant: Parti, remoteJid: Remot },
     message: {
       orderMessage: {
         itemCount: SizeDoc(),
@@ -442,26 +404,22 @@ function Fakes() {
       }
     }
   }
+  
   let fkontak = {
-    key: {
-      participant: Parti,
-      remoteJid: Remot
-    },
+    key: { participant: Parti, remoteJid: Remot },
     message: {
       contactMessage: {
         displayName: Sarapan,
-        vcard: `BEGIN:VCARD\nVERSION:3.0\nN:XL;${Sarapan},;;;\nFN:${Sarapan},\nitem1.TEL;waid=${global.nomorown.split("@")[0]}:${global.nomorown.split("@")[0]}\nitem1.X-ABLabell:Móvil\nEND:VCARD`,
+        vcard: `BEGIN:VCARD\nVERSION:3.0\nN:XL;${Sarapan},;;;\nFN:${Sarapan},\nitem1.TEL;waid=${global.nomorown.split("@")[0]}:${global.nomorown.split("@")[0]}\nitem1.X-ABLabel:Móvil\nEND:VCARD`,
         jpegThumbnail: Thum,
         thumbnail: Thum,
         sendEphemeral: true
       }
     }
   }
+  
   let fvn = {
-    key: {
-      participant: Parti,
-      remoteJid: Remot
-    },
+    key: { participant: Parti, remoteJid: Remot },
     message: {
       audioMessage: {
         mimetype: "audio/ogg; codecs=opus",
@@ -470,11 +428,9 @@ function Fakes() {
       }
     }
   }
+  
   let fvid = {
-    key: {
-      participant: Parti,
-      remoteJid: Remot
-    },
+    key: { participant: Parti, remoteJid: Remot },
     message: {
       videoMessage: {
         title: Sarapan,
@@ -485,11 +441,9 @@ function Fakes() {
       }
     }
   }
+  
   let ftextt = {
-    key: {
-      participant: Parti,
-      remoteJid: Remot
-    },
+    key: { participant: Parti, remoteJid: Remot },
     message: {
       extendedTextMessage: {
         text: Sarapan,
@@ -498,11 +452,9 @@ function Fakes() {
       }
     }
   }
+  
   let fliveLoc = {
-    key: {
-      participant: Parti,
-      remoteJid: Remot
-    },
+    key: { participant: Parti, remoteJid: Remot },
     message: {
       liveLocationMessage: {
         caption: Sarapan,
@@ -511,18 +463,13 @@ function Fakes() {
       }
     }
   }
+  
   let ftoko = {
-    key: {
-      participant: Parti,
-      remoteJid: Remot
-    },
+    key: { participant: Parti, remoteJid: Remot },
     message: {
       productMessage: {
         product: {
-          productImage: {
-            mimetype: "image/jpeg",
-            jpegThumbnail: Thum
-          },
+          productImage: { mimetype: "image/jpeg", jpegThumbnail: Thum },
           title: Sarapan,
           description: `Hola : ${moment.tz("America/Lima").format("HH:mm:ss")}`,
           currencyCode: "USD",
@@ -534,11 +481,9 @@ function Fakes() {
       }
     }
   }
+  
   let fdocs = {
-    key: {
-      participant: Parti,
-      remoteJid: Remot
-    },
+    key: { participant: Parti, remoteJid: Remot },
     message: {
       documentMessage: {
         title: Sarapan,
@@ -546,11 +491,9 @@ function Fakes() {
       }
     }
   }
+  
   let fgif = {
-    key: {
-      participant: Parti,
-      remoteJid: Remot
-    },
+    key: { participant: Parti, remoteJid: Remot },
     message: {
       videoMessage: {
         title: Sarapan,
@@ -562,6 +505,7 @@ function Fakes() {
       }
     }
   }
+  
   return pickRandom([fdocs, fgif, fkontak, fliveLoc, fpayment, fpoll, ftextt, ftoko, ftroli, fvid, fvn])
 }
 
@@ -585,48 +529,27 @@ function Sapa() {
 function Pagi() {
   let waktunya = moment.tz("America/Lima").format("HH")
   let ucapin = "Buenas noches 🌙"
-  if (waktunya >= 1) {
-    ucapin = "Buenos días "
-  }
-  if (waktunya >= 4) {
-    ucapin = "Buenos días "
-  }
-  if (waktunya > 10) {
-    ucapin = "Buenas tardes "
-  }
-  if (waktunya >= 15) {
-    ucapin = "Buenas tardes "
-  }
-  if (waktunya >= 18) {
-    ucapin = "Buenas noches "
-  }
-  if (waktunya >= 24) {
-    ucapin = "Buenas noches "
-  }
+  if (waktunya >= 1) ucapin = "Buenos días "
+  if (waktunya >= 4) ucapin = "Buenos días "
+  if (waktunya > 10) ucapin = "Buenas tardes "
+  if (waktunya >= 15) ucapin = "Buenas tardes "
+  if (waktunya >= 18) ucapin = "Buenas noches "
+  if (waktunya >= 24) ucapin = "Buenas noches "
   return ucapin
 }
 
 function ucapan() {
   const time = moment.tz('America/Lima').format('HH')
   let res = "Buenas noches "
-  if (time >= 4) {
-    res = "Buenos días "
-  }
-  if (time > 10) {
-    res = "Buenas tardes "
-  }
-  if (time >= 15) {
-    res = "Buenas tardes "
-  }
-  if (time >= 18) {
-    res = "Buenas noches "
-  }
+  if (time >= 4) res = "Buenos días "
+  if (time > 10) res = "Buenas tardes "
+  if (time >= 15) res = "Buenas tardes "
+  if (time >= 18) res = "Buenas noches "
   return res
 }
 
 function ThumbUrl() {
-  return pickRandom(['https://files.catbox.moe/8b65st.jpg'])
+  return global.logo
 }
 
 export default handler
-        
