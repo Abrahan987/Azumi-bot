@@ -1,3 +1,7 @@
+// by ABRAHAN-M 
+// CRÉDITOS JONATHANG
+
+
 const menuVideos = [
     'https://files.catbox.moe/fp6o4z.mp4',
     'https://files.catbox.moe/4lo4fy.mp4',
@@ -521,11 +525,42 @@ let handler = async (m, { conn, args }) => {
     // Seleccionar video aleatorio
     let selectedVideoUrl = menuVideos[Math.floor(Math.random() * menuVideos.length)];
     
+    // 🎨 Obtener banner desde la base de datos o usar uno por defecto
+    let bannerUrl = global.db.data.settings?.menuBanner || 'https://i.imgur.com/ejemplo.jpg';
+    
+    // 📱 Obtener configuración del canal dinámicamente
+    let canalJid = global.db.data.settings?.canalJid || global.channelid || '120363405708643160@newsletter';
+    let canalName = global.db.data.settings?.canalName || global.channelname || 'ɢᴏᴊᴏ̃ ᴄᴀɴᴀʟఌ︎';
+    let canalBannerTitle = global.db.data.settings?.canalBannerTitle || '✰𝐀𝐙𝐔𝐌𝐈 𝐁𝐎𝐓✰';
+    let canalBannerBody = global.db.data.settings?.canalBannerBody || '𝙰𝙱𝚁𝙰𝙷𝙰𝙽-𝙼';
+    
+    // 🔗 Generar link del canal
+    let canalId = canalJid.split('@')[0];
+    let canalLink = `https://whatsapp.com/channel/${canalId}`;
+    
+    // ✨ CREAR OPCIONES DEL MENSAJE CON CONFIGURACIÓN DINÁMICA ✨
     let messageOptions = {
         video: { url: selectedVideoUrl },
         gifPlayback: true,
         caption: txt,
-        mentions: [m.sender, userId]
+        mentions: [m.sender, userId],
+        contextInfo: {
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: canalJid,
+                serverMessageId: 100,
+                newsletterName: canalName
+            },
+            // 🖼️ Imagen de encabezado (miniatura más pequeña)
+            externalAdReply: {
+                title: canalBannerTitle,
+                body: canalBannerBody,
+                thumbnailUrl: bannerUrl,
+                sourceUrl: canalLink,
+                mediaType: 1,
+                renderLargerThumbnail: false
+            }
+        }
     };
 
     // Enviar el mensaje
