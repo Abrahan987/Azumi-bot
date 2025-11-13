@@ -1,30 +1,74 @@
+// By ABRAHAN-M 
+
 import moment from 'moment-timezone';
 import fetch from 'node-fetch';
 
-let handler = async (m, { conn, args }) => {
+let handler = async (m, { conn }) => {
   try {
-    // Cambiar el enlace del repositorio a uno nuevo
-    let res = await fetch('https://api.github.com/repos/Diomar-s/Kakaroto-Bot-MD');
-    if (!res.ok) throw new Error('Error al obtener datos del repositorio');
-    
-    let json = await res.json();
+  
+    const repo = 'Abrahan987/Azumi-bot';
+    const apiUrl = `https://api.github.com/repos/${repo}`;
+    const zipUrl = `https://github.com/${repo}/archive/refs/heads/main.zip`;
 
-    let txt = `*乂  S C R I P T  -  M A I N  乂*\n\n`;
-    txt += `✩  *Nombre* : ${json.name}\n`;
-    txt += `✩  *Visitas* : ${json.watchers_count}\n`;
-    txt += `✩  *Peso* : ${(json.size / 1024).toFixed(2)} MB\n`;
-    txt += `✩  *Actualizado* : ${moment(json.updated_at).format('DD/MM/YY - HH:mm:ss')}\n`;
-    txt += `✩  *Url* : ${json.html_url}\n`;
-    txt += `✩  *Forks* : ${json.forks_count}\n`;
-    txt += `✩  *Stars* : ${json.stargazers_count}\n\n`;
-    txt += `🐉 *${packname}*`;
+    // Petición con headers para evitar bloqueos
+    const res = await fetch(apiUrl, {
+      headers: {
+        'User-Agent': 'node.js',
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
 
-    let img = imagen1; // Asegúrate de que 'imagen1' esté definido
+    if (!res.ok) throw new Error(`Error al obtener datos del repositorio (${res.status})`);
 
+    const json = await res.json();
+
+    // Variables globales seguras
+    const packname = global.packname || 'Azumi-Bot';
+    const wm = global.wm || 'Bot Oficial';
+    const redes = global.redes || '';
+    const fkontak = global.fkontak || null;
+    const img = global.logo || (typeof imagen1 !== 'undefined' ? imagen1 : null);
+
+    // Fecha en zona horaria de Colombia
+    const updated = json.updated_at
+      ? moment(json.updated_at).tz('America/Bogota').format('DD/MM/YY - HH:mm:ss')
+      : 'Desconocido';
+
+    // Texto informativo
+    let txt = `*乂  A Z U M I -  S C R I P T  乂*\n\n`;
+    txt += `🧩  *Nombre:* ${json.name}\n`;
+    txt += `💫  *Creador:* ${json.owner?.login}\n`;
+    txt += `⭐  *Stars:* ${json.stargazers_count}\n`;
+    txt += `🍴  *Forks:* ${json.forks_count}\n`;
+    txt += `👀  *Visitas:* ${json.watchers_count}\n`;
+    txt += `📦  *Peso:* ${(json.size / 1024).toFixed(2)} MB\n`;
+    txt += `🕓  *Actualizado:* ${updated}\n`;
+    txt += `🔗  *Repositorio:* ${json.html_url}\n\n`;
+    txt += `🐉 *${packname}*\n`;
+
+    // Enviar información con mini vista
     await conn.sendMini(m.chat, packname, wm, txt, img, img, redes, fkontak);
+
+    // Esperar un momento antes de enviar el .zip
+    await m.react('⏳');
+
+    // Enviar el .zip del repositorio
+    await conn.sendMessage(
+      m.chat,
+      {
+        document: { url: zipUrl },
+        mimetype: 'application/zip',
+        fileName: `${json.name}-main.zip`,
+        caption: `📦 Aquí tienes el ZIP de *${json.name}*\n🔗 ${json.html_url}`,
+      },
+      { quoted: m }
+    );
+
+    await m.react('✅');
   } catch (error) {
-    console.error('Error fetching repository data:', error);
-    await m.react('❌');  // Reacciona con un emoji de error si ocurre un problema
+    console.error('Error al obtener datos del repositorio:', error);
+    try { await m.react('❌'); } catch (e) {}
+    await conn.sendMessage(m.chat, '⚠️ Error al obtener la información o enviar el .zip del repositorio.', { quoted: m });
   }
 };
 
