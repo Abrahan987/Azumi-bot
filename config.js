@@ -74,6 +74,14 @@ ch2: '120363279797793704@newsletter',
 ch3: '120363279797793704@newsletter',
 }
 
+// Imagínes
+global.foto1 = 'https://files.catbox.moe/8b65st.jpg'
+global.foto2 = 'https://files.catbox.moe/kuetwx.jpg'
+global.foto3 = 'https://i.imgur.com/ejemplo3.jpg'
+global.foto4 = 'https://i.imgur.com/ejemplo4.jpg'
+global.foto5 = 'https://i.imgur.com/ejemplo5.jpg'
+global.foto6 = 'https://i.imgur.com/ejemplo6.jpg'
+
 //• ↳ ◜𝑳𝑰𝑵𝑲𝑺◞ • 🌿
 global.gp4 = 'https://whatsapp.com/channel/0029VaehG4gKmCPX449RbA2T' //Channel 
 global.gp1 = 'https://chat.whatsapp.com/L5BxDR5YOge7tuBdidG9nV' //Grupo 
