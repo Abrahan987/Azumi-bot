@@ -14,6 +14,8 @@ import moment from 'moment-timezone';
 global.botnumber = '' //Ejemplo: +573138954963
 global.confirmCode = ''
 
+// gobal.test
+
 //• ↳𝑺𝑶𝑳𝑶 𝑫𝑬𝑺𝑨𝑹𝑹𝑶𝑳𝑳𝑨𝑫𝑶𝑹𝑬𝑺 𝑨𝑷𝑹𝑶𝑩𝑨𝑫𝑶𝑺
 global.owner = [
 "573237649689",
