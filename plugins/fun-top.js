@@ -1,8 +1,8 @@
 import util from 'util'
 import path from 'path'
-let user = a => '@' + a.split('@')[0]
 function handler(m, { groupMetadata, command, conn, text, usedPrefix}) {
 if (!text) return conn.reply(m.chat, 'Ejemplo de uso: #top *texto*', m, rcanal)
+let ps = groupMetadata.participants
 let ps = groupMetadata.participants.map(v => v.jid)
 let a = ps.getRandom()
 let b = ps.getRandom()
@@ -20,17 +20,17 @@ let l = Math.floor(Math.random() * x.length);
 let vn = `https://hansxd.nasihosting.com/sound/sound${k}.mp3`
 let top = `*${x} Top 10 ${text} ${x}*
     
-*1. ${user(a)}*
-*2. ${user(b)}*
-*3. ${user(c)}*
-*4. ${user(d)}*
-*5. ${user(e)}*
-*6. ${user(f)}*
-*7. ${user(g)}*
-*8. ${user(h)}*
-*9. ${user(i)}*
-*10. ${user(j)}*`
-m.reply(top, null, { mentions: [a, b, c, d, e, f, g, h, i, j]})
+*1. @${a.pushName}*
+*2. @${b.pushName}*
+*3. @${c.pushName}*
+*4. @${d.pushName}*
+*5. @${e.pushName}*
+*6. @${f.pushName}*
+*7. @${g.pushName}*
+*8. @${h.pushName}*
+*9. @${i.pushName}*
+*10. @${j.pushName}*`
+m.reply(top, null, { mentions: [a.id, b.id, c.id, d.id, e.id, f.id, g.id, h.id, i.id, j.id]})
 }
 handler.help = ['top *<texto>*']
 handler.command = ['top']
