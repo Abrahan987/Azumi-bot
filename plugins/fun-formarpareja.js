@@ -1,6 +1,6 @@
 const toM = (a) => '@' + a.split('@')[0];
 function handler(m, {groupMetadata}) {
-  const ps = groupMetadata.participants.map((v) => v.id);
+  const ps = groupMetadata.participants.map((v) => v.jid);
   const a = ps.getRandom();
   let b;
   do b = ps.getRandom();
