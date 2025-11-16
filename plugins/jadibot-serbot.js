@@ -66,7 +66,7 @@ let rtx2 = `
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const meguminJBOptions = {}
+const gojoJBOptions = {}
 const retryMap = new Map()
 let commandFlags = {}
 
@@ -80,21 +80,21 @@ console.log(chalk.yellow(`[DEBUG] Args:`, args))
 
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
 let id = `${who.split(`@`)[0]}`
-let pathMeguminJadiBot = path.join(`./${jadi}/`, id)
+let pathGojoJadiBot = path.join(`./${jadi}/`, id)
 
-if (!fs.existsSync(pathMeguminJadiBot)){
-fs.mkdirSync(pathMeguminJadiBot, { recursive: true })
+if (!fs.existsSync(pathGojoJadiBot)){
+fs.mkdirSync(pathGojoJadiBot, { recursive: true })
 }
 
-meguminJBOptions.pathMeguminJadiBot = pathMeguminJadiBot
-meguminJBOptions.m = m
-meguminJBOptions.conn = conn
-meguminJBOptions.args = args
-meguminJBOptions.usedPrefix = usedPrefix
-meguminJBOptions.command = command
-meguminJBOptions.fromCommand = true
+gojoJBOptions.pathGojoJadiBot = pathGojoJadiBot
+gojoJBOptions.m = m
+gojoJBOptions.conn = conn
+gojoJBOptions.args = args
+gojoJBOptions.usedPrefix = usedPrefix
+gojoJBOptions.command = command
+gojoJBOptions.fromCommand = true
 
-await meguminJadiBot(meguminJBOptions, text)
+await gojoJadiBot(gojoJBOptions, text)
 } catch (e) {
 console.error(chalk.red('[ERROR en handler]'), e)
 await conn.reply(m.chat, `❌ Error: ${e.message}`, m)
@@ -106,14 +106,14 @@ handler.tags = ['socket']
 handler.command = ['code', 'qr', 'serbot', 'jadibot']
 export default handler 
 
-export async function meguminJadiBot(options, text) {
+export async function gojoJadiBot(options, text) {
 try {
-console.log(chalk.cyan('[DEBUG] meguminJadiBot iniciado'))
+console.log(chalk.cyan('[DEBUG] gojoJadiBot iniciado'))
 
-let { pathMeguminJadiBot, m, conn, args, usedPrefix, command } = options
+let { pathGojoJadiBot, m, conn, args, usedPrefix, command } = options
 
 // Validación crítica
-if (!pathMeguminJadiBot || !conn) {
+if (!pathGojoJadiBot || !conn) {
 console.error(chalk.red('[ERROR] Faltan parámetros críticos'))
 if (m) await conn.reply(m.chat, '❌ Error interno: configuración inválida', m)
 return
@@ -136,10 +136,10 @@ if (args[1]) args[1] = args[1].replace(/^--code$|^code$/, "").trim()
 if (args[0] == "") args[0] = undefined
 }
 
-const pathCreds = path.join(pathMeguminJadiBot, "creds.json")
+const pathCreds = path.join(pathGojoJadiBot, "creds.json")
 
-if (!fs.existsSync(pathMeguminJadiBot)){
-fs.mkdirSync(pathMeguminJadiBot, { recursive: true })
+if (!fs.existsSync(pathGojoJadiBot)){
+fs.mkdirSync(pathGojoJadiBot, { recursive: true })
 }
 
 try {
@@ -163,7 +163,7 @@ console.log(chalk.green('[INFO] Iniciando conexión de Baileys...'))
 let { version, isLatest } = await fetchLatestBaileysVersion()
 const msgRetry = (MessageRetryMap) => { }
 const msgRetryCache = new NodeCache()
-const { state, saveState, saveCreds } = await useMultiFileAuthState(pathMeguminJadiBot)
+const { state, saveState, saveCreds } = await useMultiFileAuthState(pathGojoJadiBot)
 
 const connectionOptions = {
 logger: pino({ level: "fatal" }),
@@ -263,11 +263,11 @@ console.log(chalk.red(`*💨 𝑳𝒂 𝒔𝒆𝒔𝒊𝒐𝒏 𝒂𝒄𝒕𝒖�
 } 
 if (reason == 405 || reason == 401) {
 console.log(chalk.red(`*💨 𝑳𝒂 𝒔𝒆𝒔𝒊𝒐𝒏 𝒂𝒄𝒕𝒖𝒂𝒍 𝒆𝒔 𝒊𝒏𝒗𝒂𝒍𝒊𝒅𝒂, 𝑻𝒆𝒏𝒅𝒓𝒂𝒔 𝒒𝒖𝒆 𝒊𝒏𝒊𝒄𝒊𝒂𝒓 𝒔𝒆𝒔𝒊𝒐𝒏 𝒅𝒆 𝒏𝒖𝒆𝒗𝒐.*`))
-fs.rmdirSync(pathMeguminJadiBot, { recursive: true })
+fs.rmdirSync(pathGojoJadiBot, { recursive: true })
 }
 if (reason === 500) {
-console.log(chalk.red(`Error 500 en +${path.basename(pathMeguminJadiBot)}`))
-fs.rmdirSync(pathMeguminJadiBot, { recursive: true })
+console.log(chalk.red(`Error 500 en +${path.basename(pathGojoJadiBot)}`))
+fs.rmdirSync(pathGojoJadiBot, { recursive: true })
 return creloadHandler(true).catch(console.error)
 }
 if (reason === 515) {
@@ -275,15 +275,15 @@ console.log(chalk.yellow(`*❤️ 𝑳𝒂 𝒄𝒐𝒏𝒆𝒙𝒊𝒐𝒏 𝒔
 await creloadHandler(true).catch(console.error)
 }
 if (reason === 403) {
-console.log(chalk.red(`Sesión cerrada +${path.basename(pathMeguminJadiBot)}`))
-fs.rmdirSync(pathMeguminJadiBot, { recursive: true })
+console.log(chalk.red(`Sesión cerrada +${path.basename(pathGojoJadiBot)}`))
+fs.rmdirSync(pathGojoJadiBot, { recursive: true })
 }
 }
 
 if (globalThis.db.data == null) loadDatabase()
 
 if (connection == `open`) {
-console.log(chalk.green(`[CONECTADO] +${path.basename(pathMeguminJadiBot)}`))
+console.log(chalk.green(`[CONECTADO] +${path.basename(pathGojoJadiBot)}`))
 
 if (!globalThis.db.data?.users) loadDatabase()
 await joinChannels(sock)
@@ -296,7 +296,7 @@ delete commandFlags[m.sender]
 
 let userName, userJid
 userName = sock.authState.creds.me.name || 'Anónimo'
-userJid = sock.authState.creds.me.jid || `${path.basename(pathMeguminJadiBot)}`
+userJid = sock.authState.creds.me.jid || `${path.basename(pathGojoJadiBot)}`
 console.log(chalk.cyanBright(`+${userJid.split('@')[0]} Conectado.`))
 
 sock.isInit = true
@@ -354,7 +354,7 @@ creloadHandler(false)
 })
 
 } catch (e) {
-console.error(chalk.red('[ERROR CRÍTICO en meguminJadiBot]'), e)
+console.error(chalk.red('[ERROR CRÍTICO en gojoJadiBot]'), e)
 if (options.m && options.conn) {
 await options.conn.reply(options.m.chat, `❌ Error crítico: ${e.message}`, options.m)
 }
@@ -393,12 +393,12 @@ fs.statSync(path.join(subBotDir, folder)).isDirectory()
 )
 
 for (const folder of subBotFolders) {
-const pathMeguminJadiBot = path.join(subBotDir, folder)
-const credsPath = path.join(pathMeguminJadiBot, "creds.json")
+const pathGojoJadiBot = path.join(subBotDir, folder)
+const credsPath = path.join(pathGojoJadiBot, "creds.json")
 if (!fs.existsSync(credsPath)) continue
 
 const isAlreadyConnected = globalThis.conns.find(conn =>
-conn.user?.jid?.includes(folder) || path.basename(pathMeguminJadiBot) === folder
+conn.user?.jid?.includes(folder) || path.basename(pathGojoJadiBot) === folder
 )
 
 if (isAlreadyConnected || activeConnections.has(folder)) continue
@@ -414,8 +414,8 @@ console.log(chalk.yellow(`Sub-bot (+${folder}) no conectado. Intentando activarl
 activeConnections.add(folder)
 
 try {
-await meguminJadiBot({
-pathMeguminJadiBot,
+await gojoJadiBot({
+pathGojoJadiBot,
 m: null,
 conn: globalThis.conn,
 args: [],
