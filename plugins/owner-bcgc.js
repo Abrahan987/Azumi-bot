@@ -2,7 +2,7 @@ const handler = async (m, {conn, isROwner, text}) => {
   const delay = (time) => new Promise((res) => setTimeout(res, time));
   const getGroups = await conn.groupFetchAllParticipating();
   const groups = Object.entries(getGroups).slice(0).map((entry) => entry[1]);
-  const anu = groups.map((v) => v.id);
+  const anu = groups.map((v) => v.jid);
   const pesan = m.quoted && m.quoted.text ? m.quoted.text : text;
   if (!pesan) throw '🙂 *Te faltó el texto.*';
   // m.reply(`🥀 *𝖬𝖾𝗇𝗌𝖺𝗃𝖾 𝖤𝗇𝗏𝗂𝖺𝖽𝗈 𝖠:* ${anu.length} *Grupo/S*`)

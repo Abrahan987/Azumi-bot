@@ -5,7 +5,7 @@ async function handler(m, { groupMetadata, command, conn, text, usedPrefix}) {
 
 let user = a => '@' + a.split('@')[0]
 if (!text) throw `*Ejemplo:*\n${usedPrefix + command} texto`
-let ps = groupMetadata.participants.map(v => v.id)
+let ps = groupMetadata.participants.map(v => v.jid)
 let a = ps.getRandom()
 let k = Math.floor(Math.random() * 70)
 let vn = `https://hansxd.nasihosting.com/sound/sound${k}.mp3`
