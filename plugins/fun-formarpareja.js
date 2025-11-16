@@ -1,5 +1,5 @@
 function handler(m, {groupMetadata}) {
-  const ps = groupMetadata.participants;
+  const ps = groupMetadata.participants.map((v) => v.jid);
   const a = ps.getRandom();
   let b;
   do b = ps.getRandom();

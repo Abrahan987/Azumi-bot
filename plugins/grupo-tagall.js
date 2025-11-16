@@ -10,7 +10,7 @@ const handler = async (m, {isOwner, isAdmin, conn, text, participants, args, com
   for (const mem of participants) {
     teks += `@${mem.pushName}\n`;
   }
-  conn.sendMessage(m.chat, {text: teks, mentions: participants.map((a) => a.id)} );
+  conn.sendMessage(m.chat, {text: teks, mentions: participants.map((a) => a.jid)} );
 };
 handler.help = ['tagall *<mesaje>*', 'invocar *<mesaje>*'];
 handler.tags = ['grupo'];

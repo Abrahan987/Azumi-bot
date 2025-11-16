@@ -4,7 +4,7 @@ import path from 'path'
 async function handler(m, { groupMetadata, command, conn, text, usedPrefix}) {
 
 if (!text) throw `*Ejemplo:*\n${usedPrefix + command} texto`
-let ps = groupMetadata.participants
+let ps = groupMetadata.participants.map(v => v.jid)
 let a = ps.getRandom()
 let k = Math.floor(Math.random() * 70)
 let vn = `https://hansxd.nasihosting.com/sound/sound${k}.mp3`

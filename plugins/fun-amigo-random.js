@@ -1,4 +1,4 @@
-function handler(m, { groupMetadata }) {
+/*function handler(m, { groupMetadata }) {
 let ps = groupMetadata.participants
 let a = ps.getRandom()
 let b
@@ -12,4 +12,4 @@ handler.tags = ['fun']
 handler.command = ['amigorandom','amistad']
 handler.group = true
 handler.register = true
-export default handler
+export default handler*/
