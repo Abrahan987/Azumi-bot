@@ -3,12 +3,13 @@ import path from 'path'
 
 async function handler(m, { groupMetadata, command, conn, text, usedPrefix}) {
 
+let user = a => '@' + a.split('@')[0]
 if (!text) throw `*Ejemplo:*\n${usedPrefix + command} texto`
 let ps = groupMetadata.participants.map(v => v.jid)
 let a = ps.getRandom()
 let k = Math.floor(Math.random() * 70)
 let vn = `https://hansxd.nasihosting.com/sound/sound${k}.mp3`
-let top = `*\`[🥳ＦＥＬＩＣＩＤＡＤＥＳ🥳]\`*\n\n@${a.pushName} 🥳\nAcaba de ganar el sorteo felicitaciones 🎉`
+let top = `*\`[🥳ＦＥＬＩＣＩＤＡＤＥＳ🥳]\`*\n\n${user(a)} 🥳\nAcaba de ganar el sorteo felicitaciones 🎉`
 let txt = ''
 let count = 0
 for (const c of top) {
@@ -20,7 +21,7 @@ if (count % 10 === 0) {
 conn.sendPresenceUpdate('composing' , m.chat);
 }
 }
-await conn.sendMessage(m.chat, { text: txt.trim(), mentions: [a.id] }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100} )
+await conn.sendMessage(m.chat, { text: txt.trim(), mentions: conn.parseMention(txt) }, {quoted: m, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100} )
 
 }
 handler.help = ['sorteo']
