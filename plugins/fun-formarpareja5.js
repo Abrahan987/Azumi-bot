@@ -1,56 +1,55 @@
 let R = Math.random;
 let Fl = Math.floor;
-let toM = (a) => "@" + a.split("@")[0];
 function handler(m, {groupMetadata}) {
-  let ps = groupMetadata.participants.map((v) => v.id);
-  let a = ps[Fl(R() * ps.length)];
+  let ps = groupMetadata.participants;
+  let a = ps.getRandom();
   let b;
-  do b = ps[Fl(R() * ps.length)];
+  do b = ps.getRandom();
   while (b === a);
   let c;
-  do c = ps[Fl(R() * ps.length)];
+  do c = ps.getRandom();
   while (b === a);
   let d;
-  do d = ps[Fl(R() * ps.length)];
+  do d = ps.getRandom();
   while (b === a);
   let e;
-  do e = ps[Fl(R() * ps.length)];
+  do e = ps.getRandom();
   while (b === a);
   let f;
-  do f = ps[Fl(R() * ps.length)];
+  do f = ps.getRandom();
   while (b === a);
   let g;
-  do g = ps[Fl(R() * ps.length)];
+  do g = ps.getRandom();
   while (b === a);
   let h;
-  do h = ps[Fl(R() * ps.length)];
+  do h = ps.getRandom();
   while (b === a);
   let i;
-  do i = ps[Fl(R() * ps.length)];
+  do i = ps.getRandom();
   while (b === a);
   let j;
-  do j = ps[Fl(R() * ps.length)];
+  do j = ps.getRandom();
   while (b === a);
   m.reply(
     `*_😍Las 5 mejores parejas del grupo😍_*
     
-*_1.- ${toM(a)} y ${toM(b)}_*
+*_1.- @${a.pushName} y @${b.pushName}_*
 - Esta pareja esta destinada a estar junta 💙
 
-*_2.- ${toM(c)} y ${toM(d)}_*
+*_2.- @${c.pushName} y @${d.pushName}_*
 - Esta pareja son dos pequeños tortolitos enamorados ✨
 
-*_3.- ${toM(e)} y ${toM(f)}_*
+*_3.- @${e.pushName} y @${f.pushName}_*
 - Ufff y que decir de esta pareja, ya hasta familia deberian tener 🤱🧑‍🍼
 
-*_4.- ${toM(g)} y ${toM(h)}_*
+*_4.- @${g.pushName} y @${h.pushName}_*
 - Estos ya se casaron en secreto 💍
 
-*_5.- ${toM(i)} y ${toM(j)}_*
+*_5.- @${i.pushName} y @${j.pushName}_*
 - Esta pareja se esta de luna de miel ✨🥵😍❤️*`,
     null,
     {
-      mentions: [a, b, c, d, e, f, g, h, i, j],
+      mentions: [a.id, b.id, c.id, d.id, e.id, f.id, g.id, h.id, i.id, j.id],
     }
   );
 }
