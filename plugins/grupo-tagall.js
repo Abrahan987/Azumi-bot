@@ -8,7 +8,7 @@ const handler = async (m, {isOwner, isAdmin, conn, text, participants, args, com
   const colombia = `💌 *Mensaje:* ${pesan}`;
   let teks = `✨ *INVOCANDO GRUPO*\n${colombia}\n\n☁️ *Tags:*\n`;
   for (const mem of participants) {
-    teks += `@${mem.pushName}\n`;
+    teks += `@${mem.jid.split('@')[0]}\n`;
   }
   conn.sendMessage(m.chat, {text: teks, mentions: participants.map((a) => a.jid)} );
 };
