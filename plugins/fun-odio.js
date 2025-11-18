@@ -1,16 +1,19 @@
+// parcheado por ABRAHAN-M
 //Codígo creado por Destroy wa.me/584120346669
 
 let handler = async (m, { conn, command, text }) => {
-    let userId;
+    let targetUser;
 
     // Verifica si hay un mensaje al que se está respondiendo
     if (m.quoted && m.quoted.sender) {
-        userId = m.quoted.sender; // Obtiene el remitente del mensaje citado
+        targetUser = m.quoted.sender; // Obtiene el remitente del mensaje citado
     } else if (text) {
-        userId = conn.parseMention(text)[0]; // Obtiene el usuario mencionado en el texto
+        targetUser = conn.parseMention(text)[0]; // Obtiene el usuario mencionado en el texto
     } else {
         return m.reply("Por favor, menciona a alguien o responde a su mensaje."); // Mensaje de error
     }
+
+    const userId = conn.decodeJid(targetUser);
 
     // Genera un porcentaje de odio
     let hatePercentage = Math.floor(Math.random() * 100);

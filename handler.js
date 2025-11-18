@@ -129,7 +129,7 @@ user.name = nuevo
 const chat = global.db.data.chats[m.chat]
 const setting = global.db.data.settings[this.user.jid]
   
-const isROwner = [...global.owner.map((number) => number)].map(v => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(m.sender)
+const isROwner = [...global.owner.map((number) => number)].map(v => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(this.decodeJid(m.sender))
 const isOwner = isROwner || m.fromMe
 const isPrems = isROwner || global.prems.map(v => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(m.sender) || user.premium == true
 
@@ -137,14 +137,15 @@ if (opts["nyimak"])  return
 if (!m.fromMe && setting["self"]) return
 if (!m.fromMe && setting["gponly"] && !m.chat.endsWith("g.us") && !/code|p|ping|qr|estado|status|infobot|botinfo|report|reportar|invite|join|logout|suggest|help|menu/gim.test(m.text)) return
 if (opts["swonly"] && m.chat !== "status@broadcast") return
-if (opts["queque"] && m.text && !(isPrems)) {
-const queque = this.msgqueque, time = 1000 * 5
-const previousID = queque[queque.length - 1]
-queque.push(m.id || m.key.id)
-setInterval(async function () {
-if (queque.indexOf(previousID) === -1) clearInterval(this)
-await delay(time)
-}, time)
+const settings = global.db.data.settings[this.user.jid] || {};
+if (!settings.ultramode && opts["queque"] && m.text && !isPrems) {
+    const queque = this.msgqueque, time = 1000 * 5;
+    const previousID = queque[queque.length - 1];
+    queque.push(m.id || m.key.id);
+    setInterval(async function () {
+        if (queque.indexOf(previousID) === -1) clearInterval(this);
+        await delay(time);
+    }, time);
 }
 
 if (m.isBaileys) return

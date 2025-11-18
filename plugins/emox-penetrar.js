@@ -1,3 +1,4 @@
+// parcheado por ABRAHAN-M
 //Codígo creado por Destroy wa.me/584120346669
 
 let handler = async (m, { conn, command, text }) => {

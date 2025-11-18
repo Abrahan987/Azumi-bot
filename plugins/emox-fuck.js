@@ -1,3 +1,4 @@
+// parcheado por ABRAHAN-M
 //Codígo creado por Destroy wa.me/584120346669
 
 import fs from 'fs';
@@ -21,10 +22,8 @@ if (!db.data.chats[m.chat].nsfw && m.isGroup) {
     m.react('🥵');
 
     let str;
-    if (m.mentionedJid.length > 0) {
+    if (m.mentionedJid.length > 0 || m.quoted) {
         str = `\`${name2}\` *se lo metió sabrosamente a* \`${name || who}\`.`;
-    } else if (m.quoted) {
-        str = `\`${name2}\` *cogió fuertemente a* \`${name || who}\`.`;
     } else {
         str = `\`${name2}\` *está cogiendo! >.<*`.trim();
     }
@@ -59,7 +58,7 @@ if (!db.data.chats[m.chat].nsfw && m.isGroup) {
         const videos = [pp, pp2, pp3, pp4, pp5, pp6, pp8, pp9, pp10, pp11, pp12, pp13, pp14, pp15, pp16, pp17, pp18, pp19, pp20, pp21, pp22, pp23, pp24, pp25];
         const video = videos[Math.floor(Math.random() * videos.length)];
 
-        let mentions = [who];
+        let mentions = [who, sender];
         conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: str, mentions }, { quoted: m });
     }
 }

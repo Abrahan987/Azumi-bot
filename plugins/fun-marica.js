@@ -1,9 +1,11 @@
+// parcheado por ABRAHAN-M
 const handler = async (m, {conn}) => {
+  const targetUser = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
+  const who = conn.decodeJid(targetUser);
   const audioUrl = 'https://files.catbox.moe/ozmhxx.m4a'; // URL del audio
-  const who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
 
   // Si el mensaje es una respuesta, obtener el remitente del mensaje citado
-  const mentionedUser = m.quoted && m.quoted.sender ? m.quoted.sender : null;
+  const mentionedUser = m.quoted && m.quoted.sender ? conn.decodeJid(m.quoted.sender) : null;
 
   await conn.sendFile(m.chat, global.API('https://some-random-api.com', '/canvas/gay', {
     avatar: await conn.profilePictureUrl(who, 'image').catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png'),
