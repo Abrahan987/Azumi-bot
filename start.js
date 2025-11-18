@@ -207,7 +207,15 @@ console.log(chalk.bold.yellow(`\n✅ ESCANEA EL CÓDIGO QR EXPIRA EN 45 SEGUNDOS
 }
 if (connection == 'open') {
 console.log(boxen(chalk.bold(' ¡CONECTADO CON WHATSAPP! '), { borderStyle: 'round', borderColor: 'green', title: chalk.green.bold('● CONEXIÓN ●'), titleAlignment: '', float: '' }))
-await joinChannels(conn)}
+await joinChannels(conn)
+
+const settings = global.db.data.settings[conn.user.jid]
+if (settings && settings.ultramode_notified === false) {
+const ownerJid = global.owner[0] + '@s.whatsapp.net'
+const message = `*「 MODO ULTRA 」*\n\nEl bot se ha reiniciado y el Modo Ultra ha sido *${settings.ultramode ? 'activado' : 'desactivado'}* exitosamente.`
+conn.sendMessage(ownerJid, { text: message })
+settings.ultramode_notified = true
+}}
 let reason = new Boom(lastDisconnect?.error)?.output?.statusCode
 if (connection === 'close') {
 if (reason === DisconnectReason.badSession) {
@@ -231,6 +239,7 @@ console.log(chalk.bold.yellowBright(`\n╭┄┄┄┄┄┄┄┄┄┄┄┄�
 await global.reloadHandler(true).catch(console.error) //process.send('reset')
 } else {
 console.log(chalk.bold.redBright(`\n⚠️❗ RAZON DE DESCONEXIÓN DESCONOCIDA: ${reason || 'No encontrado'} >> ${connection || 'No encontrado'}`))
+await global.reloadHandler(true).catch(console.error)
 }}
 }
 process.on('uncaughtException', console.error)
