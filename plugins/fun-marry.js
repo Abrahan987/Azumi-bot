@@ -1,3 +1,4 @@
+// parcheado por ABRAHAN-M
 // - OfcKing >> https://github.com/OfcKing
 
 import fs from 'fs'
@@ -26,16 +27,18 @@ let handler = async (m, { conn, command, usedPrefix }) => {
   const acceptCmd = /^(acepto)$/i.test(command) // acepta Acepto / acepto / ACEPTO
   const divorceCmd = /^(divorce)$/i.test(command)
 
+  const sender = conn.decodeJid(m.sender);
+
   switch (true) {
     // 💍 PROPONER MATRIMONIO
     case marryCmd: {
-      let sender = m.sender
-      let target = m.mentionedJid?.[0]
-
-      if (!target)
+      let targetUser = m.mentionedJid?.[0]
+      if (!targetUser)
         return m.reply(
           `✧ Debes mencionar a alguien para proponer matrimonio.\n> Ejemplo » *${usedPrefix + command} @usuario*`
         )
+
+      const target = conn.decodeJid(targetUser);
 
       if (sender === target) return m.reply('✧ ¡No puedes proponerte matrimonio a ti mismo!')
 
@@ -66,13 +69,14 @@ let handler = async (m, { conn, command, usedPrefix }) => {
 
     // 💞 ACEPTAR PROPUESTA
     case acceptCmd: {
-      let sender = m.sender
-      let target = m.mentionedJid?.[0]
+      let targetUser = m.mentionedJid?.[0]
 
-      if (!target)
+      if (!targetUser)
         return m.reply(
           `✧ Debes mencionar a la persona que te propuso matrimonio.\n> Ejemplo » *${usedPrefix + command} @usuario*`
         )
+
+      const target = conn.decodeJid(targetUser);
 
       if (sender === target) return m.reply('✧ No puedes aceptarte a ti mismo 😹')
 
@@ -98,22 +102,21 @@ let handler = async (m, { conn, command, usedPrefix }) => {
 
     // 💔 DIVORCIO
     case divorceCmd: {
-      let userDivorce = m.sender
-      if (!marriages[userDivorce]) return m.reply('✧ Tú no estás casado/a con nadie.')
+      if (!marriages[sender]) return m.reply('✧ Tú no estás casado/a con nadie.')
 
-      let pareja = marriages[userDivorce]
-      delete marriages[userDivorce]
+      let pareja = marriages[sender]
+      delete marriages[sender]
       delete marriages[pareja]
       saveMarriages(marriages)
 
-      global.db.data.users[userDivorce].marry = ''
+      global.db.data.users[sender].marry = ''
       global.db.data.users[pareja].marry = ''
 
       await conn.reply(
         m.chat,
-        `✧ @${userDivorce.split('@')[0]} y @${pareja.split('@')[0]} se han divorciado 💔`,
+        `✧ @${sender.split('@')[0]} y @${pareja.split('@')[0]} se han divorciado 💔`,
         m,
-        { mentions: [userDivorce, pareja] }
+        { mentions: [sender, pareja] }
       )
       break
     }
