@@ -206,8 +206,17 @@ if (opcion == '1' || methodCodeQR) {
 console.log(chalk.bold.yellow(`\n✅ ESCANEA EL CÓDIGO QR EXPIRA EN 45 SEGUNDOS`))}
 }
 if (connection == 'open') {
-console.log(boxen(chalk.bold(' ¡CONECTADO CON WHATSAPP! '), { borderStyle: 'round', borderColor: 'green', title: chalk.green.bold('● CONEXIÓN ●'), titleAlignment: '', float: '' }))
-await joinChannels(conn)}
+    console.log(boxen(chalk.bold(' ¡CONECTADO CON WHATSAPP! '), { borderStyle: 'round', borderColor: 'green', title: chalk.green.bold('● CONEXIÓN ●'), titleAlignment: '', float: '' }));
+    await joinChannels(conn);
+
+    const settings = global.db.data.settings[conn.user.jid];
+    if (settings && settings.ultramode) {
+        const ownerJid = '573237649689@s.whatsapp.net';
+        setTimeout(() => {
+            conn.sendMessage(ownerJid, { text: '*🚀 Bot online en Modo Ultra.*' });
+        }, 2000);
+    }
+}
 let reason = new Boom(lastDisconnect?.error)?.output?.statusCode
 if (connection === 'close') {
 if (reason === DisconnectReason.badSession) {

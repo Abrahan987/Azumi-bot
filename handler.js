@@ -137,14 +137,15 @@ if (opts["nyimak"])  return
 if (!m.fromMe && setting["self"]) return
 if (!m.fromMe && setting["gponly"] && !m.chat.endsWith("g.us") && !/code|p|ping|qr|estado|status|infobot|botinfo|report|reportar|invite|join|logout|suggest|help|menu/gim.test(m.text)) return
 if (opts["swonly"] && m.chat !== "status@broadcast") return
-if (opts["queque"] && m.text && !(isPrems)) {
-const queque = this.msgqueque, time = 1000 * 5
-const previousID = queque[queque.length - 1]
-queque.push(m.id || m.key.id)
-setInterval(async function () {
-if (queque.indexOf(previousID) === -1) clearInterval(this)
-await delay(time)
-}, time)
+const settings = global.db.data.settings[this.user.jid] || {};
+if (!settings.ultramode && opts["queque"] && m.text && !isPrems) {
+    const queque = this.msgqueque, time = 1000 * 5;
+    const previousID = queque[queque.length - 1];
+    queque.push(m.id || m.key.id);
+    setInterval(async function () {
+        if (queque.indexOf(previousID) === -1) clearInterval(this);
+        await delay(time);
+    }, time);
 }
 
 if (m.isBaileys) return
