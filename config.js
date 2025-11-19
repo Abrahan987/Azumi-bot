@@ -76,13 +76,6 @@ ch2: '120363279797793704@newsletter',
 ch3: '120363279797793704@newsletter',
 }
 
-// Imagínes
-global.foto1 = 'https://files.catbox.moe/8b65st.jpg'
-global.foto2 = 'https://files.catbox.moe/kuetwx.jpg'
-global.foto3 = 'https://files.catbox.moe/342j9r.jpg'
-global.foto4 = 'https://files.catbox.moe/342j9r.jpg'
-global.foto5 = 'https://files.catbox.moe/dgfdmu.jpg'
-global.foto6 = 'https://files.catbox.moe/dgfdmu.jpg'
 
 //• ↳ ◜𝑳𝑰𝑵𝑲𝑺◞ • 🌿
 global.gp4 = 'https://whatsapp.com/channel/0029VaehG4gKmCPX449RbA2T' //Channel 
