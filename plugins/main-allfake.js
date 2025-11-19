@@ -13,6 +13,13 @@ let conn = {
   getName: (jid) => 'Bot Owner'
 }
 
+global.foto1 = 'https://files.catbox.moe/8b65st.jpg'
+global.foto2 = 'https://files.catbox.moe/kuetwx.jpg'
+global.foto3 = 'https://files.catbox.moe/342j9r.jpg'
+global.foto4 = 'https://files.catbox.moe/342j9r.jpg'
+global.foto5 = 'https://files.catbox.moe/dgfdmu.jpg'
+global.foto6 = 'https://files.catbox.moe/dgfdmu.jpg'
+
 let author = 'ɢᴏᴊᴏ̃ ʙᴏᴛ'
 let sgc = 'https://instagram.com'
 let sig = 'https://instagram.com'
