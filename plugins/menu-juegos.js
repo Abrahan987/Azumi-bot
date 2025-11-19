@@ -2,7 +2,8 @@ import fetch from 'node-fetch';
 const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems}) => {
   if (usedPrefix == 'a' || usedPrefix == 'A') return;
   try {
-    const pp = imagen7;
+    const globalPhotos = [global.foto1, global.foto2, global.foto3, global.foto4, global.foto5, global.foto6].filter(p => p);
+    const pp = globalPhotos.length > 0 ? globalPhotos[Math.floor(Math.random() * globalPhotos.length)] : 'https://i.imgur.com/placeholder.jpg';
     // let vn = './media/menu.mp3'
     const img = './Menu2.jpg';
     const d = new Date(new Date + 3600000);
