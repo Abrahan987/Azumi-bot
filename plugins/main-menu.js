@@ -523,7 +523,8 @@ let handler = async (m, { conn, args }) => {
     let bot = global.db.data.settings[conn.user.jid];
     
     // Seleccionar video aleatorio
-    let selectedVideoUrl = menuVideos[Math.floor(Math.random() * menuVideos.length)];
+    let videos = global.db.data.settings[conn.user.jid]?.menuVideos?.length > 0 ? global.db.data.settings[conn.user.jid].menuVideos : menuVideos;
+    let selectedVideoUrl = videos[Math.floor(Math.random() * videos.length)];
     
     // 🎨 Obtener banner desde la base de datos o usar uno por defecto
     const globalPhotos = [global.foto1, global.foto2, global.foto3, global.foto4, global.foto5, global.foto6].filter(p => p);
