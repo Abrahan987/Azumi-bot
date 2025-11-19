@@ -1,13 +1,14 @@
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) return conn.reply(m.chat, `🥰 *Que Nombre Deseas Ponerme?*`, m, rcanal)
+  if (!text) return conn.reply(m.chat, `🥰 *¿Qué nombre deseas ponerme?*`, m, global.estilo)
+  if (text.length > 25) return conn.reply(m.chat, 'El nombre no puede tener más de 25 caracteres.', m, global.estilo)
   try {
     await conn.updateProfileName(text)
-    return conn.reply(m.chat, '✅️ *Nombre Cambiado Con Éxito*', m, rcanal)
-   await m.react(done)
+    await m.react('✅')
+    return conn.reply(m.chat, '✅️ *Nombre cambiado con éxito*', m, global.estilo)
   } catch (e) {
     console.log(e)
-    await m.react(error)
-    return conn.reply(m.chat, `⚙️ Ocurrió Un Error¡!`, m, fake)
+    await m.react('✖️')
+    return conn.reply(m.chat, `⚙️ ¡Ocurrió un error!`, m, global.estilo)
   }
 }
 handler.help = ['nuevonombrebot <teks>']
