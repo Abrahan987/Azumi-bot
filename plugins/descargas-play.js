@@ -27,7 +27,7 @@ const texto1 = `*_𔓕꯭  ꯭ ꯭𓏲꯭֟፝੭ ꯭⌑𝙰𝚉𝚄𝙼𝙸-�
 > 📽️ *Su Audio se está enviando, espere un momento...*`.trim();
 
 await conn.sendMessage(m.chat, {
-image: { url: yt_play[0].thumbnail }, caption: texto1, contextInfo: { externalAdReply: { title: '♡  ͜ ۬︵࣪᷼⏜݊᷼𝘿𝙚𝙨𝙘𝙖𝙧𝙜𝙖𝙨⏜࣪᷼︵۬ ͜ ', body: '𝙰𝚉𝚄𝙼𝙸-𝙰𝙱𝚁𝙰𝙷𝙰𝙽', sourceUrl: cn, thumbnail: global.logo }}, quoted: estilo});
+image: { url: yt_play[0].thumbnail }, caption: texto1, contextInfo: { externalAdReply: { title: '♡  ͜ ۬︵࣪᷼⏜݊᷼𝘿𝙚𝙨𝙘𝙖𝙧𝙜𝙖𝙨⏜࣪᷼︵۬ ͜ ', body: '𝙰𝚉𝚄𝙼𝙸-𝙰𝙱𝚁𝙰𝙷𝙰𝙽', sourceUrl: global.channel, thumbnail: global.logo }}, quoted: estilo});
 try {
 await m.react(rwait);
 const apiUrl = `https://mayapi.ooguy.com/ytdl?url=${encodeURIComponent(yt_play[0].url)}&type=mp3&apikey=may-1b57a5b1`;

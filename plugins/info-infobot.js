@@ -56,7 +56,7 @@ setTimeout(resolve, 1000)
 let timestamp = speed()
 let latensi = speed() - timestamp
 let goku = `╭─⬣「 *Info De Azumi* 」⬣\n`
-goku += `│ 👑 *Creador* : @${owner[0][0].split('@s.whatsapp.net')[0]}\n`
+goku += `│ 👑 *Creador* : @${global.owner[0].split('@')[0]}\n`
 goku += `│ 🍭 *Prefijo* : [  ${usedPrefix}  ]\n`
 goku += `│ 📦 *Total Plugins* : ${totalf}\n`
 goku += `│ 💫 *Plataforma* : ${platform()}\n`
@@ -81,7 +81,10 @@ goku += `╭─⬣「 *NodeJS Uso de memoria* 」⬣\n`
 goku += `${'```' + Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v => v.length)), ' ')}: ${format(used[key])}`).join('\n') + '```'}\n`
 goku += `╰─⬣`
 
-await conn.reply(m.chat, goku, fkontak, { contextInfo: { mentionedJid: [owner[0][0] + '@s.whatsapp.net'], externalAdReply: { mediaUrl: false, mediaType: 1, description: false, title: '↷✦╎Info - Bot╎🚩˖ ⸙',body: false, previewType: 0, thumbnail: icons, sourceUrl: redes}}})
+const globalPhotos = [global.foto1, global.foto2, global.foto3, global.foto4, global.foto5, global.foto6].filter(p => p);
+const icons = globalPhotos.length > 0 ? globalPhotos[Math.floor(Math.random() * globalPhotos.length)] : 'https://i.imgur.com/placeholder.jpg';
+
+await conn.reply(m.chat, goku, global.estilo, { contextInfo: { mentionedJid: [global.owner[0] + '@s.whatsapp.net'], externalAdReply: { mediaUrl: false, mediaType: 1, description: false, title: '↷✦╎Info - Bot╎🚩˖ ⸙',body: false, previewType: 0, thumbnail: icons, sourceUrl: global.md}}})
 // await conn.sendFile(m.chat, imagen1, 'luffy.jpg', luffy, fkontak, null, rcanal)
 }
 handler.help = ['infobot']

@@ -13,7 +13,7 @@ let yaemori = `🌟 *Respeta las reglas de AZUMI-Bot-MD*\n
 ⚠️ 𝗔𝘃𝗶𝘀𝗼: *Puedes apoyarnos dejando una estrellita 🌟 al repositorio oficial de AZUMI.*
 
 ${global.md}`.trim()
-await conn.reply(m.chat, yaemori, m, fake)
+await conn.reply(m.chat, yaemori, m, estilo)
 
 }
 handler.help = ['botreglas']

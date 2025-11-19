@@ -526,7 +526,8 @@ let handler = async (m, { conn, args }) => {
     let selectedVideoUrl = menuVideos[Math.floor(Math.random() * menuVideos.length)];
     
     // 🎨 Obtener banner desde la base de datos o usar uno por defecto
-    let bannerUrl = global.db.data.settings?.menuBanner || 'https://i.imgur.com/ejemplo.jpg';
+    const globalPhotos = [global.foto1, global.foto2, global.foto3, global.foto4, global.foto5, global.foto6].filter(p => p);
+    let bannerUrl = global.db.data.settings?.menuBanner || (globalPhotos.length > 0 ? globalPhotos[Math.floor(Math.random() * globalPhotos.length)] : 'https://i.imgur.com/placeholder.jpg');
     
     // 📱 Obtener configuración del canal dinámicamente
     let canalJid = global.db.data.settings?.canalJid || global.channelid || '120363405708643160@newsletter';
