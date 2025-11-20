@@ -27,7 +27,7 @@ let handler = async (m, { conn, args }) => {
     let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags).length;
     
     let botSettings = global.db.data.settings[conn.user.jid] || {};
-    let bottName = botSettings.botName || global.botname;
+    let bottName = botSettings.botName || botname;
 
     // Variables del usuario (ajusta según tu base de datos)
     let exp = user.exp || 0;
@@ -527,8 +527,7 @@ let handler = async (m, { conn, args }) => {
     let selectedVideoUrl = videos[Math.floor(Math.random() * videos.length)];
     
     // 🎨 Obtener banner desde la base de datos o usar uno por defecto
-    const globalPhotos = [global.foto1, global.foto2, global.foto3, global.foto4, global.foto5, global.foto6].filter(p => p);
-    let bannerUrl = global.db.data.settings?.menuBanner || (globalPhotos.length > 0 ? globalPhotos[Math.floor(Math.random() * globalPhotos.length)] : 'https://i.imgur.com/placeholder.jpg');
+    let bannerUrl = global.db.data.settings?.menuBanner || 'https://i.imgur.com/ejemplo.jpg';
     
     // 📱 Obtener configuración del canal dinámicamente
     let canalJid = global.db.data.settings?.canalJid || global.channelid || '120363405708643160@newsletter';
