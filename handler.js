@@ -23,55 +23,63 @@ let m = chatUpdate.messages[chatUpdate.messages.length - 1]
 if (!m) return
 if (global.db.data == null)
 await global.loadDatabase()
+
+const groupMetadata = m.isGroup ? await this.groupMetadata(m.chat).catch(_ => null) : {}
+const participants = m.isGroup ? groupMetadata.participants : []
+let isSenderLid = m.sender.endsWith('@lid')
+let senderJid = isSenderLid ? participants.find(p => p.id === m.sender)?.jid || m.sender : m.sender
+
+let user = global.db.data.users[senderJid]
+if (!user) {
+  user = {
+    jid: senderJid,
+    lid: isSenderLid ? m.sender : undefined,
+    name: m.name,
+    exp: 0,
+    coin: 0,
+    bank: 0,
+    level: 0,
+    health: 100,
+    genre: "",
+    birth: "",
+    marry: "",
+    description: "",
+    packstickers: null,
+    premium: false,
+    premiumTime: 0,
+    banned: false,
+    bannedReason: "",
+    commands: 0,
+    afk: -1,
+    afkReason: "",
+    warn: 0,
+  }
+  global.db.data.users[senderJid] = user
+} else if (isSenderLid && user.lid !== m.sender) {
+  user.lid = m.sender
+}
+
+m.sender = senderJid // Ensure m.sender is always a JID
+
+let isAdmin = false, isSuperAdmin = false, isBotAdmin = false, isBotSuperAdmin = false
+if (m.isGroup) {
+  const participant = participants.find(p => this.decodeJid(p.id) === m.sender)
+  if (participant) {
+    isAdmin = participant.admin === 'admin'
+    isSuperAdmin = participant.admin === 'superadmin'
+  }
+  const botParticipant = participants.find(p => this.decodeJid(p.id) === this.decodeJid(this.user.jid))
+  if (botParticipant) {
+    isBotAdmin = botParticipant.admin === 'admin'
+    isBotSuperAdmin = botParticipant.admin === 'superadmin'
+  }
+}
+
 try {
 m = smsg(this, m) || m
 if (!m) return
 m.exp = 0
 try {
-let user = global.db.data.users[m.sender]
-if (typeof user !== "object")
-global.db.data.users[m.sender] = {}
-if (user) {
-if (!("name" in user)) user.name = m.name
-if (!isNumber(user.exp)) user.exp = 0
-if (!isNumber(user.coin)) user.coin = 0
-if (!isNumber(user.bank)) user.bank = 0
-if (!isNumber(user.level)) user.level = 0
-if (!isNumber(user.health)) user.health = 100
-if (!("genre" in user)) user.genre = ""
-if (!("birth" in user)) user.birth = ""
-if (!("marry" in user)) user.marry = ""
-if (!("description" in user)) user.description = ""
-if (!("packstickers" in user)) user.packstickers = null
-if (!("premium" in user)) user.premium = false
-if (!user.premium) user.premiumTime = 0
-if (!("banned" in user)) user.banned = false
-if (!("bannedReason" in user)) user.bannedReason = ""
-if (!isNumber(user.commands)) user.commands = 0
-if (!isNumber(user.afk)) user.afk = -1
-if (!("afkReason" in user)) user.afkReason = ""
-if (!isNumber(user.warn)) user.warn = 0
-} else global.db.data.users[m.sender] = {
-name: m.name,
-exp: 0,
-coin: 0,
-bank: 0,
-level: 0,
-health: 100,
-genre: "",
-birth: "",
-marry: "",
-description: "",
-packstickers: null,
-premium: false,
-premiumTime: 0,
-banned: false,
-bannedReason: "",
-commands: 0,
-afk: -1,
-afkReason: "",
-warn: 0
-}
 let chat = global.db.data.chats[m.chat]
 if (typeof chat !== 'object')
 global.db.data.chats[m.chat] = {}
@@ -119,7 +127,6 @@ gponly: false
 console.error(e)
 }
 if (typeof m.text !== "string") m.text = ""
-const user = global.db.data.users[m.sender]
 try {
 const actual = user.name || ""
 const nuevo = m.pushName || await this.getName(m.sender)
@@ -151,13 +158,7 @@ if (m.isBaileys) return
 m.exp += Math.ceil(Math.random() * 10)
 let usedPrefix
 
-const groupMetadata = m.isGroup ? { ...(conn.chats[m.chat]?.metadata || await this.groupMetadata(m.chat).catch(_ => null) || {}), ...(((conn.chats[m.chat]?.metadata || await this.groupMetadata(m.chat).catch(_ => null) || {}).participants) && { participants: ((conn.chats[m.chat]?.metadata || await this.groupMetadata(m.chat).catch(_ => null) || {}).participants || []).map(p => ({ ...p, id: p.jid, jid: p.jid, lid: p.lid })) }) } : {}
-const participants = ((m.isGroup ? groupMetadata.participants : []) || []).map(participant => ({ id: participant.jid, jid: participant.jid, lid: participant.lid, admin: participant.admin }))
-const userGroup = (m.isGroup ? participants.find((u) => conn.decodeJid(u.jid) === m.sender) : {}) || {}
-const botGroup = (m.isGroup ? participants.find((u) => conn.decodeJid(u.jid) == this.user.jid) : {}) || {}
-const isRAdmin = userGroup?.admin == "superadmin" || false
-const isAdmin = isRAdmin || userGroup?.admin == "admin" || false
-const isBotAdmin = botGroup?.admin || false
+const isRAdmin = isSuperAdmin
 
 const ___dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), "./plugins")
 for (const name in global.plugins) {
