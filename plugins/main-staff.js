@@ -30,11 +30,10 @@ let staff = `✨ *EQUIPO DE AYUDANTES*
 📱 *Número:* wa.me/50378666265
 `
 
-// Seleccionar una imagen global aleatoria
-const globalPhotos = [global.foto1, global.foto2, global.foto3, global.foto4, global.foto5, global.foto6].filter(p => p);
-const imagen = globalPhotos.length > 0 ? globalPhotos[Math.floor(Math.random() * globalPhotos.length)] : 'https://i.imgur.com/placeholder.jpg';
+// Imagen que se enviará junto al mensaje
+let imagen = 'https://spacny.wuaze.com//uploads/IMG-20251017-WA1543.jpg'
 
-await conn.sendFile(m.chat, imagen, 'staff.jpg', staff.trim(), global.estilo, false, {
+await conn.sendFile(m.chat, imagen, 'staff.jpg', staff.trim(), fkontak, true, {
 contextInfo: {
 'forwardingScore': 200,
 'isForwarded': false,
@@ -44,12 +43,12 @@ renderLargerThumbnail: true,
 title: `🥷 Developers 👑`,
 body: `✨ Staff Oficial`,
 mediaType: 1,
-sourceUrl: global.md,
+sourceUrl: redes,
 thumbnailUrl: imagen
 }}
 }, { mentions: m.sender })
 
-m.react('🌟')
+m.react(emoji)
 }
 
 handler.help = ['staff']
