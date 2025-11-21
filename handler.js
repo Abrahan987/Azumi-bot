@@ -144,7 +144,7 @@ if (opts["nyimak"])  return
 if (!m.fromMe && setting["self"]) return
 if (!m.fromMe && setting["gponly"] && !m.chat.endsWith("g.us") && !/code|p|ping|qr|estado|status|infobot|botinfo|report|reportar|invite|join|logout|suggest|help|menu/gim.test(m.text)) return
 if (opts["swonly"] && m.chat !== "status@broadcast") return
-if (opts["queque"] && m.text && !(isPrems)) {
+if (opts["queque"] && m.text && !(isPrems || setting.ultramode)) {
 const queque = this.msgqueque, time = 1000 * 5
 const previousID = queque[queque.length - 1]
 queque.push(m.id || m.key.id)
