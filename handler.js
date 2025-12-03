@@ -27,10 +27,39 @@ try {
 m = smsg(this, m) || m
 if (!m) return
 m.exp = 0
+
+let participants = []
+if (m.isGroup) {
+    const groupMetadata = await this.groupMetadata(m.chat).catch(_ => null)
+    if (groupMetadata) {
+        participants = groupMetadata.participants
+    }
+}
+if (m.isGroup) {
+    for (const participant of participants) {
+        if (participant.lid && participant.jid) {
+            global.db.data.lids[participant.lid] = participant.jid
+        }
+    }
+    const userInGroup = participants.find(u => u.jid === m.sender || u.lid === m.sender)
+    if (userInGroup) {
+        m.sender = userInGroup.jid
+    }
+} else if (m.sender.endsWith('@lid')) {
+    const jid = global.db.data.lids[m.sender]
+    if (jid) {
+        m.sender = jid
+    }
+}
+
 try {
 let user = global.db.data.users[m.sender]
-if (typeof user !== "object")
-global.db.data.users[m.sender] = {}
+if (typeof user !== "object") {
+    if (m.sender.endsWith('@lid') && !m.isGroup) {
+        return
+    }
+    global.db.data.users[m.sender] = {}
+}
 if (user) {
 if (!("name" in user)) user.name = m.name
 if (!isNumber(user.exp)) user.exp = 0
@@ -151,8 +180,6 @@ if (m.isBaileys) return
 m.exp += Math.ceil(Math.random() * 10)
 let usedPrefix
 
-const groupMetadata = m.isGroup ? { ...(conn.chats[m.chat]?.metadata || await this.groupMetadata(m.chat).catch(_ => null) || {}), ...(((conn.chats[m.chat]?.metadata || await this.groupMetadata(m.chat).catch(_ => null) || {}).participants) && { participants: ((conn.chats[m.chat]?.metadata || await this.groupMetadata(m.chat).catch(_ => null) || {}).participants || []).map(p => ({ ...p, id: p.jid, jid: p.jid, lid: p.lid })) }) } : {}
-const participants = ((m.isGroup ? groupMetadata.participants : []) || []).map(participant => ({ id: participant.jid, jid: participant.jid, lid: participant.lid, admin: participant.admin }))
 const userGroup = (m.isGroup ? participants.find((u) => conn.decodeJid(u.jid) === m.sender) : {}) || {}
 const botGroup = (m.isGroup ? participants.find((u) => conn.decodeJid(u.jid) == this.user.jid) : {}) || {}
 const isRAdmin = userGroup?.admin == "superadmin" || false
@@ -369,7 +396,7 @@ mods: `『✦』El comando *${comando}* solo puede ser usado por los moderadores
 premium: `『✦』El comando *${comando}* solo puede ser usado por los usuarios premium.`, 
 group: `『✦』El comando *${comando}* solo puede ser usado en grupos.`,
 private: `『✦』El comando *${comando}* solo puede ser usado al chat privado del bot.`,
-admin: `『✦』El comando *${comando}* solo puede ser usado por los administradores del grupo.`, 
+admin: `『✦』El comando *${comando}* solo puede ser usado por los administradores del grupo.`,
 botAdmin: `『✦』Para ejecutar el comando *${comando}* debo ser administrador del grupo.`,
 restrict: `『✦』Esta caracteristica está desactivada.`
 }[type]
