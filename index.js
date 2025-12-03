@@ -102,7 +102,6 @@ stats: {},
 msgs: {},
 sticker: {},
 settings: {},
-lids: {},
 ...(global.db.data || {}),
 }
 global.db.chain = chain(global.db.data)
