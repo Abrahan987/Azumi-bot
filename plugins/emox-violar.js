@@ -30,15 +30,7 @@ Tenemos que volver a sudar juntos!!.*`;
     }
     
     if (m.isGroup) {
-        let pp = 'https://files.catbox.moe/cnmn0x.jpg'; 
-        let pp2 = 'https://files.catbox.moe/xph5x5.mp4'; 
-        let pp3 = 'https://files.catbox.moe/4ffxj8.mp4';
-        let pp4 = 'https://files.catbox.moe/f6ovgb.mp4';
-        let pp5 = 'https://qu.ax/XmLe.mp4';
-        let pp6 = 'https://qu.ax/yiMt.mp4';
-        let pp7 = 'https://qu.ax/cdKQ.mp4';
-        
-        const videos = [pp, pp2, pp3, pp4, pp5, pp6, pp7];
+        const videos = [global.foto1, global.foto2, global.foto3, global.foto4, global.foto5, global.foto6];
         const video = videos[Math.floor(Math.random() * videos.length)];
 
         let mentions = [who, sender];

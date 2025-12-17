@@ -527,7 +527,7 @@ let handler = async (m, { conn, args }) => {
     let selectedVideoUrl = videos[Math.floor(Math.random() * videos.length)];
     
     // 🎨 Obtener banner desde la base de datos o usar uno por defecto
-    let bannerUrl = global.db.data.settings?.menuBanner || 'https://i.imgur.com/ejemplo.jpg';
+    let bannerUrl = global.db.data.settings?.menuBanner || [global.foto1, global.foto2, global.foto3, global.foto4, global.foto5, global.foto6].getRandom();
     
     // 📱 Obtener configuración del canal dinámicamente
     let canalJid = global.db.data.settings?.canalJid || global.channelid || '120363405708643160@newsletter';
