@@ -1,5 +1,5 @@
 const handler = async (m, {conn, text, command, usedPrefix}) => {
-  const pp = './src/warn.jpg';
+  const pp = [global.foto1, global.foto2, global.foto3, global.foto4, global.foto5, global.foto6].getRandom();
   let who;
   if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text;
   else who = m.chat;

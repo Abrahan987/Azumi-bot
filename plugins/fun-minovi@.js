@@ -15,7 +15,7 @@ let handler = async (m, { conn, text }) => {
 
   const userId = conn.decodeJid(targetUser);
 
-  let pp = './src/avatar_contact.png';
+  let pp = [global.foto1, global.foto2, global.foto3, global.foto4, global.foto5, global.foto6].getRandom();
   try {
     pp = await conn.profilePictureUrl(userId, 'image');
   } catch (e) {
